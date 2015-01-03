@@ -1,2 +1,5 @@
 .meteor/local
 .meteor/meteorite
+.DS_Store
+client/.DS_Store
+public/.DS_Store
