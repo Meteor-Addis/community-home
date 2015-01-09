@@ -35,7 +35,7 @@ section.parallax {
 }
 /* Slide 1 */
 #slide-1 .bcg {
-  background-image: url('images/lion_bg.jpg');
+  background-image: url('/images/lion_bg.jpg');
 }
 #slide-1 h1 {
   font-family: "aaarghnormal";
@@ -54,23 +54,90 @@ section.parallax {
   position: relative;
 }
 .profPic-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
+}
+.thumbnailContainer {
   width: 200px;
   height: 200px;
-  overflow: hidden;
-}
-.prof-pic {
-  width: 100%;
-  max-height: 100%;
-}
-.user-profile {
-  min-height: 373px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
 }
 .members-thumb {
   width: 200px;
   max-height: 200px;
 }
+.profile-header {
+  background: url(/images/shattered.png) repeat;
+  width: 100%;
+  height: 100%;
+}
+.profile-header > .row {
+  margin: 0 auto;
+  color: white;
+  text-shadow: #030303 0px 0px 6px;
+}
+.inverse-dropdown .loginOR {
+  display: block;
+  color: #FFF;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+input[type=text].fName-input,
+input[type=text].lName-input {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+input[type=email].email-input {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+input[type=password].password-input,
+input[type=password].old-password,
+input[type=password].new-password,
+input[type=password].confirm-password {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+#signIn,
+#createUser,
+#register,
+#cancelRegister,
+#submit-change,
+#cancel-change {
+  box-shadow: none !important;
+}
+.signInForm {
+  margin: 0 auto;
+}
+.registrationForm {
+  display: none;
+  margin: 0 auto;
+}
+.member-snapshot {
+  float: left;
+}
+.member-snapshot:nth-of-type(4n+1) {
+  clear: both;
+}
+#changePasswordSection {
+  display: none;
+}
 html {
   height: 100%;
+  width: 100%;
   min-height: 100%;
   min-width: 100%;
 }
@@ -78,6 +145,9 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+}
+header {
+  margin-bottom: -20px;
 }
 h1,
 h2,
@@ -128,6 +198,34 @@ hr {
 }
 .login-btn:hover {
   background-color: #0D2C04;
+}
+#login-dropdown {
+  width: 98%;
+  margin-right: 5px;
+}
+#login-dropdown .avatar {
+  display: inline-block;
+}
+.inverse-dropdown {
+  margin-top: 12px !important;
+  background-color: #222;
+  border-color: #080808;
+}
+.inverse-dropdown li {
+  margin: 10px 10px 5px 10px;
+}
+.inverse-dropdown > li > a {
+  color: #999;
+}
+.inverse-dropdown > li > a:hover {
+  color: #fff;
+  background-color: #555;
+}
+.inverse-dropdown > li > button {
+  box-shadow: none;
+}
+.login-options {
+  width: 300px;
 }
 .carousel-caption {
   z-index: 10;
@@ -186,7 +284,7 @@ hr {
   padding-top: 20px;
 }
 .ftr {
-  background: url(../images/shattered.png) repeat;
+  background: url(/images/shattered.png) repeat;
   padding: 80px 0 60px 0;
   width: 100%;
 }
@@ -313,5 +411,32 @@ hr {
 @media (min-width: 768px) {
   .carousel-caption > .item {
     height: 600px;
+  }
+  .profileName {
+    margin-left: 15px;
+  }
+}
+@media (max-width: 768px) {
+  .profileName {
+    text-align: center;
+  }
+  .profPic-container {
+    width: 300px;
+    height: 300px;
+    padding-bottom: 0;
+  }
+  .profileName {
+    font-size: 48px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar > .container {
+    width: 768px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  .thumbnailContainer {
+    width: 190px;
+    height: 190px;
   }
 }

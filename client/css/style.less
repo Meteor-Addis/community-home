@@ -1,5 +1,5 @@
-// TODO: Fix buggy responsiveness. Eg. When reducing window width, navbar-right items jump underneath navbar-brand
-// TODO: Fix profile picture stretching. Crop to fit div instead.
+// TODO: Fix buggy responsiveness. Eg. When reducing window width, navbar-right items jump underneath navbar-brand and profile name has unpredictable behaviour
+
 
 section.parallax{
   -webkit-box-sizing: content-box;
@@ -38,7 +38,7 @@ section.parallax{
     width: 100%;
 }
 /* Slide 1 */
-#slide-1 .bcg {background-image:url('images/lion_bg.jpg')}
+#slide-1 .bcg {background-image:url('/images/lion_bg.jpg')}
 
 #slide-1 h1{
     font-family: "aaarghnormal";
@@ -64,18 +64,26 @@ section.parallax{
 }
 
 .profPic-container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  margin: 0 auto;
+}
+
+.thumbnailContainer {
   width: 200px;
   height: 200px;
-  overflow: hidden;
-}
-
-.prof-pic {
-  width: 100%;
-  max-height: 100%;
-}
-
-.user-profile {
-  min-height: 373px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin: 0 auto;
 }
 
 .members-thumb {
@@ -83,12 +91,76 @@ section.parallax{
   max-height: 200px;
 }
 
+.profile-header {
+  background: url(/images/shattered.png) repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-header > .row {
+  margin: 0 auto;
+  color: white;
+  text-shadow: #030303 0px 0px 6px;
+}
+
+.inverse-dropdown  .loginOR {
+  display: block;
+  color: #FFF;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+input[type=text].fName-input, input[type=text].lName-input {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+
+input[type=email].email-input {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+
+input[type=password].password-input, input[type=password].old-password, input[type=password].new-password, input[type=password].confirm-password {
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+
+#signIn, #createUser, #register, #cancelRegister, #submit-change, #cancel-change {
+  box-shadow: none !important;
+}
+
+.signInForm {
+  margin: 0 auto;
+}
+
+.registrationForm {
+  display: none;
+  margin: 0 auto;
+}
+
+.member-snapshot {
+  float: left;
+}
+
+.member-snapshot:nth-of-type(4n+1) {
+  clear: both;
+}
+
+#changePasswordSection {
+  display: none;
+}
+
+
 // ----------------------------------------------------------
 
 // The CSS below was obtained from Robel Equbasilassie's mockup of addis.meteor.com at https://github.com/robikieq/MeteorAddis
 
 html {
   height: 100%;
+  width: 100%;
   min-height: 100%;
   min-width: 100%;
 }
@@ -97,6 +169,10 @@ body {
   margin:0;
   padding:0;
   height:100%;
+}
+
+header {
+  margin-bottom: -20px;
 }
 
 h1, h2, h3, h4 {
@@ -149,12 +225,41 @@ hr {
   text-transform: uppercase;
   background-color: #2C0E04;
   margin-left: 5px;
-//  border-color: #D14512;
-//  width: 100px;
 }
 
 .login-btn:hover {
   background-color: #0D2C04;
+}
+
+#login-dropdown {
+  width: 98%;
+  margin-right: 5px;
+  .avatar {
+    display: inline-block;
+  }
+}
+
+.inverse-dropdown{
+  margin-top: 12px !important;
+  background-color: #222;
+  border-color: #080808;
+  li {
+    margin: 10px 10px 5px 10px;
+  }
+  &>li>a{
+    color: #999;
+    &:hover{
+      color: #fff;
+      background-color: #555;
+    }
+  }
+  &>li>button {
+    box-shadow: none;
+  }
+}
+
+.login-options {
+  width: 300px;
 }
 
 .carousel-caption {
@@ -229,12 +334,9 @@ hr {
   padding-top: 20px;
 }
 .ftr {
-  background: url(../images/shattered.png) repeat;
+  background: url(/images/shattered.png) repeat;
   padding: 80px 0 60px 0;
   width: 100%;
-//  position: absolute;
-//  bottom: 0;
-//  left: 0;
 }
 
 .ftr address, .ftr a, .ftr p {
@@ -385,5 +487,35 @@ hr {
   }
   .breadcrumb {
 //    margin-top: 20px;
+  }
+  .profileName {
+    margin-left: 15px;
+  }
+}
+
+@media(max-width: 768px) {
+  .profileName {
+    text-align: center;
+  }
+  .profPic-container {
+    width: 300px;
+    height: 300px;
+    padding-bottom: 0;
+  }
+  .profileName {
+    font-size: 48px;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 992px) {
+  .navbar > .container {
+    width: 768px;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 1200px) {
+  .thumbnailContainer {
+    width: 190px;
+    height: 190px;
   }
 }
