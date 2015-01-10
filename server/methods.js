@@ -8,6 +8,7 @@ Meteor.methods({
             Meteor.users.remove({_id: id});
             return true;
         }
+
         else {
             return "Account delete failed";
         }

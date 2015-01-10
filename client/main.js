@@ -36,7 +36,7 @@ Router.route('/blog.html', function() {
 
 Router.route('/members.html', function() {
     this.render('members', {
-        data: function() { return Users.find({}, {sort: {"profile.name": 1}});},
+        data: function() { return Users.find({}, {sort: {"profile.name": 1}});}
     });
 });
 
@@ -44,7 +44,7 @@ Router.route('/event-detail.html', function() {
     this.render('event-detail', {
         data: function() { return Users.find();}
     });
-})
+});
 
 Router.route('user/:_id', function() {
     this.render('profile', {
