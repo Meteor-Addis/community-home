@@ -41,11 +41,18 @@ Accounts.onCreateUser(function(options, user) {
                 options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large&width=500&height=500";
                 user.profile = options.profile;
             }
+
+            if (user.services.facebook.email) {
+                user.profile.email = user.services.facebook.email;
+            }
+
+            user.profile.bio = null;
+            user.profile.services = ["facebook"];
+
             return user;
         }
 
         if (service == "github") {
-            // TODO: Figure out how to get user's full name and avatar picture from github. Same for service==meetup
             var accessToken = user.services.github.accessToken,
                 result,
                 profile;
@@ -66,19 +73,35 @@ Accounts.onCreateUser(function(options, user) {
                 'login',
                 'name',
                 'avatar_url',
-                'url',
-                'company',
-                'blog',
-                'location',
                 'email',
                 'bio',
                 'html_url'
             );
 
+            if (! profile.name) {
+                profile.name = profile.login;
+                delete profile.login;
+            }
+            else {
+                delete profile.login;
+            }
+
             profile.picture = profile.avatar_url;
             delete profile.avatar_url;
 
+            user.services.github.link = profile.html_url;
+            delete profile.html_url;
+
+            if (profile.services) {
+                profile.services.push("github");
+            }
+            else {
+                profile.services = ["github"]
+            }
+
             user.profile = profile;
+
+            user.profile.services = ["github"];
 
             return user;
         }
@@ -96,16 +119,18 @@ Accounts.onCreateUser(function(options, user) {
             var userProperties = result.data;
 
             if(userProperties.hasOwnProperty("photo") && userProperties.photo_link !== "") {
-                var picture = userProperties.photo.photo_link;
+                var picture = userProperties.photo.highres_link;
             }
 
             options.profile = {
                 'name': userProperties.name,
-                'link': userProperties.link,
                 'bio': userProperties.bio,
                 'picture': picture,
-                'id': meetupId
+                'email': null, // Meetup doesn't expose emails. To be filled out on an "Edit profile" page.
+                'services': ["meetup"]
             };
+
+            user.services.meetup.link = userProperties.link;
 
             user.profile = options.profile;
 
@@ -116,6 +141,9 @@ Accounts.onCreateUser(function(options, user) {
         if (service == "password") {
             user.profile = options.profile;
             user.profile.email = user.emails[0].address;
+            user.profile.picture = null;
+            user.profile.bio = null;
+            user.profile.services = ["password"];
 
             return user;
         }

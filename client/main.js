@@ -52,7 +52,7 @@ Router.route('user/:_id', function() {
     });
 });
 
-// Client/Server Logic
+// Client Logic
 
 if (Meteor.isClient) {
     Meteor.subscribe("users");
@@ -151,7 +151,7 @@ if (Meteor.isClient) {
             var password = template.find('#registrationPassword').value;
 
 
-            Accounts.createUser({email: email, password : password, profile: {firstName: first, lastName: last, name: fullName}}, function(err) {
+            Accounts.createUser({email: email, password : password, profile: {name: fullName}}, function(err) {
                 if (err) {
                     throw new Meteor.Error("Registration failed");
                 }
