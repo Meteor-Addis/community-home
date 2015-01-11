@@ -98,6 +98,47 @@ Accounts.onCreateUser(function(options, user) {
         }
 
         if (service == "github") {
+            if (user.services.github.email && Users.findOne({'profile.email': user.services.github.email})) {
+                var existingUser = Users.findOne({'profile.email': user.services.github.email});
+
+                existingUser.profile.services.push("github");
+                existingUser.services.github = user.services.github;
+
+                var accessToken = user.services.github.accessToken,
+                    result,
+                    profile;
+
+                result = Meteor.http.get('https://api.github.com/user',{
+                    params : {
+                        access_token : accessToken
+                    },
+                    headers: {"User-Agent": "Meteor/1.0"}
+                });
+
+                if(result.error){
+                    throw result.error
+                }
+
+                profile = _.pick(result.data,
+                    'avatar_url',
+                    'bio',
+                    'html_url'
+                );
+
+                if (! existingUser.profile.picture) {
+                    existingUser.profile.picture = profile.avatar_url;
+                }
+                if (! existingUser.profile.bio) {
+                    existingUser.profile.bio = profile.bio;
+                }
+
+                user.services.github.link = profile.html_url;
+
+                Users.remove({'_id': existingUser._id});
+
+                return existingUser;
+            }
+
             var accessToken = user.services.github.accessToken,
                 result,
                 profile;
@@ -135,13 +176,6 @@ Accounts.onCreateUser(function(options, user) {
 
             user.services.github.link = profile.html_url;
             delete profile.html_url;
-
-            if (profile.services) {
-                profile.services.push("github");
-            }
-            else {
-                profile.services = ["github"]
-            }
 
             user.profile = profile;
 
