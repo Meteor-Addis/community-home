@@ -20,8 +20,8 @@ ServiceConfiguration.configurations.remove({
 });
 ServiceConfiguration.configurations.insert({
     service: "github",
-    clientId: "2c6034b39288c9a979af",
-    secret: "d482c0f02550cb2b8b0268909721502467dd8466"
+    clientId: "6955099e1c9f2bc9355c",
+    secret: "9574a6144496214e27d792ae7e8f07b3ef1c2055"
 });
 
 ServiceConfiguration.configurations.remove({
@@ -29,8 +29,8 @@ ServiceConfiguration.configurations.remove({
 });
 ServiceConfiguration.configurations.insert({
     service: "meetup",
-    clientId: "5g5feiednjd9j60oj7saqk2d3c",
-    secret: "3q9k06m0sjacm1usq93pp7jrnk"
+    clientId: "33ve5upvrvugv6s3m2ja4oif7k",
+    secret: "d5vnerk4rkq8sn5jqof1962rju"
 });
 
 Accounts.onCreateUser(function(options, user) {
