@@ -2,38 +2,81 @@
  * Created by Hilawi on 1/1/15.
  */
 
+getEnvironment = function(){
+    if(process.env.ROOT_URL == "http://addis.meteor.com"){
+        return "production";
+    }
+    else{
+        return "development";
+    }
+}
+
+var env = getEnvironment();
+
+if (env == "development") {
+    ServiceConfiguration.configurations.remove({
+        service: 'facebook'
+    });
+
+    ServiceConfiguration.configurations.insert({
+        service: 'facebook',
+        appId: '1586727228211595',
+        secret: 'd902296d9fb732b9e8d66e71c5595707'
+    });
+
+    ServiceConfiguration.configurations.remove({
+        service: "github"
+    });
+    ServiceConfiguration.configurations.insert({
+        service: "github",
+        clientId: "e14b61285484b49366af",
+        secret: "82e0959a4582ad487351acc2fa48d992d0a3c158"
+    });
+
+    ServiceConfiguration.configurations.remove({
+        service: "meetup"
+    });
+    ServiceConfiguration.configurations.insert({
+        service: "meetup",
+        clientId: "hlfkvn3tsng2q7ht885hh57er",
+        secret: "jmp4buqn3837e1pgsht3pvsoe3"
+    });
+}
+else {
+    ServiceConfiguration.configurations.remove({
+        service: 'facebook'
+    });
+
+    ServiceConfiguration.configurations.insert({
+        service: 'facebook',
+        appId: '1586721864878798',
+        secret: 'd63b69d08b183a635d7d4af9a5e10a1f'
+    });
+
+    ServiceConfiguration.configurations.remove({
+        service: "github"
+    });
+    ServiceConfiguration.configurations.insert({
+        service: "github",
+        clientId: "6955099e1c9f2bc9355c",
+        secret: "9574a6144496214e27d792ae7e8f07b3ef1c2055"
+    });
+
+    ServiceConfiguration.configurations.remove({
+        service: "meetup"
+    });
+    ServiceConfiguration.configurations.insert({
+        service: "meetup",
+        clientId: "pfekq7jadi8sqejnvl9q4qtph8",
+        secret: "jb6b35qfq9qttptqqc319n15j4"
+    });
+}
+
 Users = Meteor.users;
 
 MEETUP_API_KEY = "78761a1837f20736a037068304565"; // This key is from the account :http://www.meetup.com/members/183336755/
 // The key should not be visible once deployed. It'll have to be placed in a file and passed to Meteor upon startup as an environment variable
 
-ServiceConfiguration.configurations.remove({
-    service: 'facebook'
-});
-
-ServiceConfiguration.configurations.insert({
-    service: 'facebook',
-    appId: '1586727228211595',
-    secret: 'd902296d9fb732b9e8d66e71c5595707'
-});
-
-ServiceConfiguration.configurations.remove({
-    service: "github"
-});
-ServiceConfiguration.configurations.insert({
-    service: "github",
-    clientId: "2c6034b39288c9a979af",
-    secret: "d482c0f02550cb2b8b0268909721502467dd8466"
-});
-
-ServiceConfiguration.configurations.remove({
-    service: "meetup"
-});
-ServiceConfiguration.configurations.insert({
-    service: "meetup",
-    clientId: "5g5feiednjd9j60oj7saqk2d3c",
-    secret: "3q9k06m0sjacm1usq93pp7jrnk"
-});
 
 Accounts.onCreateUser(function(options, user) {
     if (user.services) {
@@ -185,6 +228,13 @@ Accounts.onCreateUser(function(options, user) {
         }
 
         if (service == "meetup") {
+            // Can't perform account merging for Meetup at account creation because Meetup doesn't release users'
+            // emails through the API. The alternative is when the "Edit profile" page is implemented, if a user
+            // with an account associated with Meetup enters an email, we can call a function we'll implement in
+            // methods.js to merge the Meetup-associated account to any other existing account with the same email.
+            // The email would first need to be verified because anyone that knows the email of another user can
+            // associate their Meetup-associated account with the other user's account and take control of it.
+
             var meetupId = user.services.meetup.id;
             var target = 'https://api.meetup.com/2/member/' + meetupId + '?key=' + MEETUP_API_KEY + '&signed=true';
 
