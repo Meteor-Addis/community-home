@@ -52,15 +52,10 @@ Router.route('user/:_id', function() {
     });
 });
 
-// Client/Server Logic
+// Client Logic
 
 if (Meteor.isClient) {
     Meteor.subscribe("users");
-
-    //Meteor.autorun(function() {
-    //    var width = $('.profPic-container').width();
-    //    $('.profPic-container').css({'height':width+'px'});
-    //});
 
     Template.members.helpers({
         allUsers: function() {
@@ -112,8 +107,6 @@ if (Meteor.isClient) {
             var email = template.find('.email-input').value;
             var password = template.find('.password-input').value;
 
-            console.log(email, password);
-
             Meteor.loginWithPassword(email, password, function(err) {
                 if (err) {
                     throw new Meteor.Error("Password login failed");
@@ -151,14 +144,12 @@ if (Meteor.isClient) {
             var password = template.find('#registrationPassword').value;
 
 
-            Accounts.createUser({email: email, password : password, profile: {firstName: first, lastName: last, name: fullName}}, function(err) {
+            Accounts.createUser({email: email, password : password, profile: {name: fullName}}, function(err) {
                 if (err) {
                     throw new Meteor.Error("Registration failed");
                 }
 
             });
-
-            return false;
         },
 
         "click .changePassword": function(event, template) {
