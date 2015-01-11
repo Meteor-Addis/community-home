@@ -181,50 +181,51 @@ Accounts.onCreateUser(function(options, user) {
 
                 return existingUser;
             }
-
-            var accessToken = user.services.github.accessToken,
-                result,
-                profile;
-
-            result = Meteor.http.get('https://api.github.com/user',{
-                params : {
-                    access_token : accessToken
-                },
-                headers: {"User-Agent": "Meteor/1.0"}
-            });
-
-            if(result.error){
-                throw result.error
-            }
-
-            profile = _.pick(result.data,
-                'login',
-                'name',
-                'avatar_url',
-                'email',
-                'bio',
-                'html_url'
-            );
-
-            if (! profile.name) {
-                profile.name = profile.login;
-                delete profile.login;
-            }
             else {
-                delete profile.login;
+                var accessToken = user.services.github.accessToken,
+                    result,
+                    profile;
+
+                result = Meteor.http.get('https://api.github.com/user',{
+                    params : {
+                        access_token : accessToken
+                    },
+                    headers: {"User-Agent": "Meteor/1.0"}
+                });
+
+                if(result.error){
+                    throw result.error
+                }
+
+                profile = _.pick(result.data,
+                    'login',
+                    'name',
+                    'avatar_url',
+                    'email',
+                    'bio',
+                    'html_url'
+                );
+
+                if (! profile.name) {
+                    profile.name = profile.login;
+                    delete profile.login;
+                }
+                else {
+                    delete profile.login;
+                }
+
+                profile.picture = profile.avatar_url;
+                delete profile.avatar_url;
+
+                user.services.github.link = profile.html_url;
+                delete profile.html_url;
+
+                user.profile = profile;
+
+                user.profile.services = ["github"];
+
+                return user;
             }
-
-            profile.picture = profile.avatar_url;
-            delete profile.avatar_url;
-
-            user.services.github.link = profile.html_url;
-            delete profile.html_url;
-
-            user.profile = profile;
-
-            user.profile.services = ["github"];
-
-            return user;
         }
 
         if (service == "meetup") {
@@ -267,13 +268,28 @@ Accounts.onCreateUser(function(options, user) {
         }
 
         if (service == "password") {
-            user.profile = options.profile;
-            user.profile.email = user.emails[0].address;
-            user.profile.picture = null;
-            user.profile.bio = null;
-            user.profile.services = ["password"];
+            var email = user.emails[0].address;
 
-            return user;
+            if (email && Users.findOne({'profile.email': email})) {
+                var existingUser = Users.findOne({'profile.email': email});
+
+                existingUser.profile.services.push("password");
+                existingUser.services.password = user.services.password;
+
+                Users.remove({'_id': existingUser._id});
+
+                return existingUser;
+            }
+            else {
+                user.profile = options.profile;
+                user.profile.email = email;
+                user.profile.picture = null;
+                user.profile.bio = null;
+                user.profile.services = ["password"];
+
+                return user;
+            }
+
         }
     }
     return user;
