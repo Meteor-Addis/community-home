@@ -178,6 +178,9 @@ hr {
   margin-top: -10px;
   margin-right: 6px;
 }
+.navbar .navbar-logo {
+  width: 150px;
+}
 .navbar-nav > li > a {
   font-size: 14px;
   letter-spacing: 1px;
@@ -279,9 +282,6 @@ hr {
 }
 .topic-header {
   padding-top: 10px;
-}
-.topic-vote {
-  padding-top: 20px;
 }
 .ftr {
   background: url(/images/shattered.png) repeat;

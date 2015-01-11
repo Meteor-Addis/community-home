@@ -1,57 +1,5 @@
 Users = Meteor.users;
 
-// Routing configurations
-
-Router.configure({
-    layoutTemplate: 'layout'
-});
-
-Router.route('/index.html', function() {
-    this.render('home', {
-        data: function() { return Users.find();}
-    });
-});
-
-Router.route('/', function() {
-    this.redirect('/index.html');
-});
-
-Router.route('/events.html', function() {
-    this.render('events', {
-        data: function() { return Users.find();}
-    });
-});
-
-Router.route('/topics.html', function() {
-    this.render('topics', {
-        data: function() { return Users.find();}
-    });
-});
-
-Router.route('/blog.html', function() {
-    this.render('blog', {
-        data: function() { return Users.find();}
-    });
-});
-
-Router.route('/members.html', function() {
-    this.render('members', {
-        data: function() { return Users.find({}, {sort: {"profile.name": 1}});},
-    });
-});
-
-Router.route('/event-detail.html', function() {
-    this.render('event-detail', {
-        data: function() { return Users.find();}
-    });
-})
-
-Router.route('user/:_id', function() {
-    this.render('profile', {
-        data: function() { return Users.findOne({_id: this.params._id});}
-    });
-});
-
 // Client Logic
 
 if (Meteor.isClient) {
@@ -230,12 +178,13 @@ if (Meteor.isClient) {
             })
         }
     })
+
 }
 
-Handlebars.registerHelper('activeIfCurrent', function(page) {
-    if (Router.current().route.getName() == page) {
-        return "active";
-    }
-    return "";
+Handlebars.registerHelper('activeIfCurrent', function (page) {
+	if (Router.current().route.getName() == page) {
+		return "active";
+	}
+	return "";
 });
 

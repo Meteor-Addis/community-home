@@ -1,0 +1,20 @@
+
+<template name="profile">
+	<div class="user-profile">
+
+		<div class="jumbotron profile-header">
+
+			<div class="container row">
+				<div class="col-sm-3">
+					{{#if profile.picture }}
+						<div class="profPic-container" style="background-image: url({{ profile.picture }})"></div>
+					{{else}}
+						<div class="profPic-container" style="background-image: url(/images/default.png)"></div>
+					{{/if}}
+				</div>
+				<div class="col-sm-9"><h1 class="profileName"><br/>{{ profile.name }}</h1></div>
+			</div>
+		</div>
+
+	</div>
+</template>
