@@ -1,0 +1,76 @@
+
+<template name="login">
+	<button class="btn btn-danger login-btn dropdown-toggle" type="button" id="login-dropdown" data-toggle="dropdown"
+	        aria-expanded="true">
+		{{#if currentUser }}
+			{{> avatar user=currentUser size="extra-small" shape="rounded" }}
+			<!--TODO: Replace use of avatar by profile.picture with special CSS. Avatar is not guaranteed to match profile.picture-->
+			{{ currentUser.profile.name }}
+		{{else}}
+			Login/Sign Up
+		{{/if}}
+		<span class="caret"></span>
+	</button>
+	{{#if currentUser }}
+		<ul class="dropdown-menu inverse-dropdown" role="menu" aria-labelledby="login-dropdown">
+			<li id="myProfile" role="presentation"><a href="/user/{{ currentUser._id }}">My Profile</a></li>
+			<li id="changePassword" role="presentation"><a class="changePassword" tabindex="-1" href="#">Change Password</a>
+			</li>
+			<li id="deleteAccount" role="presentation"><a class="deleteAccount" tabindex="-1" href="#">Delete Account</a></li>
+			<li id="logout" role="presentation"><a class="logout" role="menuitem logout" tabindex="-1" href="#">Logout</a>
+			</li>
+			<li id="changePasswordSection" role="presentation">
+				<div class="input-group passwordForm">
+					<form>
+						<input class="form-control old-password" type="password" placeholder="Current Password"
+						       aria-label="Input Current Password"/>
+						<input class="form-control new-password" type="password" placeholder="New Password"
+						       aria-label="Input New Password"/>
+						<input class="form-control confirm-password" type="password" placeholder="Confirm Password"
+						       aria-label="Confirm Password"/>
+						<input id="submit-change" class="btn btn-danger" type="submit" value="Change"/>
+						<input id="cancel-change" class="btn btn-primary" type="submit" value="Cancel"/>
+					</form>
+				</div>
+			</li>
+		</ul>
+	{{else}}
+		<ul class="dropdown-menu inverse-dropdown login-options" role="menu" aria-labelledby="login-dropdown">
+			<li role="presentation">
+				<button id="facebook-login" class="login-button btn btn-block btn-Facebook">Sign in with Facebook</button>
+			</li>
+			<li role="presentation">
+				<button id="github-login" class="login-button btn btn-block btn-Github">Sign in with Github</button>
+			</li>
+			<li role="presentation">
+				<button id="meetup-login" class="login-button btn btn-danger btn-block btn-Meetup">Sign in with Meetup</button>
+			</li>
+			<li role="presentation" class="loginOR"><span>OR</span></li>
+			<li role="presentation">
+				<div class="input-group signInForm">
+					<form>
+						<input class="form-control email-input" type="email" placeholder="Email" aria-label="Enter Email">
+						<input class="form-control password-input" type="password" placeholder="Password"
+						       aria-label="Enter Password">
+						<input id="signIn" class="btn btn-primary" type="submit" value="Sign In"/>
+						<input id="register" class="btn btn-primary" type="submit" value="Create Account"/>
+					</form>
+				</div>
+			</li>
+			<li role="presentation" class="registrationForm">
+				<div class="input-group">
+					<form>
+						<input class="form-control fName-input" type="text" placeholder="First Name" aria-label="Enter First Name">
+						<input class="form-control lName-input" type="text" placeholder="Last Name" aria-label="Enter Last Name">
+						<input id="registrationEmail" class="form-control email-input" type="email" placeholder="Email"
+						       aria-label="Enter Email">
+						<input id="registrationPassword" class="form-control password-input" type="password" placeholder="Password"
+						       aria-label="Enter Password">
+						<input id="createUser" class="btn btn-primary" type="submit" value="Register"/>
+						<input id="cancelRegister" class="btn btn-default" type="submit" value="Cancel"/>
+					</form>
+				</div>
+			</li>
+		</ul>
+	{{/if}}
+</template>

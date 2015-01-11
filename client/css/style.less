@@ -1,520 +1,528 @@
 // TODO: Fix buggy responsiveness. Eg. When reducing window width, navbar-right items jump underneath navbar-brand and profile name has unpredictable behaviour
 
-section.parallax{
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+section.parallax {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
 }
 
 /* CSS */
 .hsContainer {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
 }
+
 .hsContent {
-    max-width: 450px;
-    margin: -150px auto 0 auto;
-    display: table-cell;
-    vertical-align: middle;
-    color: #ebebeb;
-    padding: 0 8%;
-    text-align: center
+	max-width: 450px;
+	margin: -150px auto 0 auto;
+	display: table-cell;
+	vertical-align: middle;
+	color: #ebebeb;
+	padding: 0 8%;
+	text-align: center
 }
+
 .bcg {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
 }
+
 /* Slide 1 */
-#slide-1 .bcg {background-image:url('/images/lion_bg.jpg')}
-
-#slide-1 h1{
-    font-family: "aaarghnormal";
-    background-color: rgba(0,0,0,0.3);
-    padding: 20px 30px;
+#slide-1 .bcg {
+	background-image: url('/images/lion_bg.jpg')
 }
 
+#slide-1 h1 {
+	font-family: "aaarghnormal";
+	background-color: rgba(0, 0, 0, 0.3);
+	padding: 20px 30px;
+}
 
-#slide-1 a{
-  color: #fff;
-  text-decoration: none;
+#slide-1 a {
+	color: #fff;
+	text-decoration: none;
 }
 
 // ----------------------------------------------------------
 
 .navbar-fixed-top {
-  position: relative;
+	position: relative;
 }
 
 .wrapper {
-  min-height: 100%;
-  position: relative;
+	min-height: 100%;
+	position: relative;
 }
 
 .profPic-container {
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
 
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 
-  margin: 0 auto;
+	margin: 0 auto;
 }
 
 .thumbnailContainer {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  margin: 0 auto;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	margin: 0 auto;
 }
 
 .members-thumb {
-  width: 200px;
-  max-height: 200px;
+	width: 200px;
+	max-height: 200px;
 }
 
 .profile-header {
-  background: url(/images/shattered.png) repeat;
-  width: 100%;
-  height: 100%;
+	background: url(/images/shattered.png) repeat;
+	width: 100%;
+	height: 100%;
 }
 
 .profile-header > .row {
-  margin: 0 auto;
-  color: white;
-  text-shadow: #030303 0px 0px 6px;
+	margin: 0 auto;
+	color: white;
+	text-shadow: #030303 0px 0px 6px;
 }
 
-.inverse-dropdown  .loginOR {
-  display: block;
-  color: #FFF;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
+.inverse-dropdown .loginOR {
+	display: block;
+	color: #FFF;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
 input[type=text].fName-input, input[type=text].lName-input {
-  background-color: #eee;
-  margin-bottom: 10px;
+	background-color: #eee;
+	margin-bottom: 10px;
 }
 
 input[type=email].email-input {
-  background-color: #eee;
-  margin-bottom: 10px;
+	background-color: #eee;
+	margin-bottom: 10px;
 }
 
 input[type=password].password-input, input[type=password].old-password, input[type=password].new-password, input[type=password].confirm-password {
-  background-color: #eee;
-  margin-bottom: 10px;
+	background-color: #eee;
+	margin-bottom: 10px;
 }
 
 #signIn, #createUser, #register, #cancelRegister, #submit-change, #cancel-change {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .signInForm {
-  margin: 0 auto;
+	margin: 0 auto;
 }
 
 .registrationForm {
-  display: none;
-  margin: 0 auto;
+	display: none;
+	margin: 0 auto;
 }
 
 .member-snapshot {
-  float: left;
+	float: left;
 }
 
 .member-snapshot:nth-of-type(4n+1) {
-  clear: both;
+	clear: both;
 }
 
 #changePasswordSection {
-  display: none;
+	display: none;
 }
-
 
 // ----------------------------------------------------------
 
 // The CSS below was obtained from Robel Equbasilassie's mockup of addis.meteor.com at https://github.com/robikieq/MeteorAddis
 
 html {
-  height: 100%;
-  width: 100%;
-  min-height: 100%;
-  min-width: 100%;
+	height: 100%;
+	width: 100%;
+	min-height: 100%;
+	min-width: 100%;
 }
 
 body {
-  margin:0;
-  padding:0;
-  height:100%;
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 header {
-  margin-bottom: -20px;
+	margin-bottom: -20px;
 }
 
 h1, h2, h3, h4 {
-  font-family: sans-serif;
+	font-family: sans-serif;
 }
 
 b, strong {
-  font-weight: 400;
+	font-weight: 400;
 }
 
 hr {
-  border-top: 1px solid #c9c9c9
+	border-top: 1px solid #c9c9c9
 }
 
 .btn {
-  box-shadow: 0 2px 2px #999;
+	box-shadow: 0 2px 2px #999;
 }
 
 .container .navbar-brand {
-  float: left;
-  font-size: 14px;
-  height: 50px;
-  line-height: 18px;
-  padding-bottom: 18px;
-  padding-top: 18px;
+	float: left;
+	font-size: 14px;
+	height: 50px;
+	line-height: 18px;
+	padding-bottom: 18px;
+	padding-top: 18px;
 }
 
 .navbar .navbar-brand img {
-  float: left;
-  margin-top: -10px;
-  margin-right: 6px;
+	float: left;
+	margin-top: -10px;
+	margin-right: 6px;
+}
+
+.navbar {
+	.navbar-logo {
+		width: 150px;
+	}
 }
 
 .navbar-nav > li > a {
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding-bottom: 18px;
-  padding-top: 18px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding-bottom: 18px;
+	padding-top: 18px;
 }
 
 .container .navbar-toggle {
-  margin-bottom: 18px;
-  margin-top: 18px;
+	margin-bottom: 18px;
+	margin-top: 18px;
 }
 
 .login-btn {
-  box-shadow: none;
-  margin-top: 10px;
-  text-transform: uppercase;
-  background-color: #2C0E04;
-  margin-left: 5px;
+	box-shadow: none;
+	margin-top: 10px;
+	text-transform: uppercase;
+	background-color: #2C0E04;
+	margin-left: 5px;
 }
 
 .login-btn:hover {
-  background-color: #0D2C04;
+	background-color: #0D2C04;
 }
 
 #login-dropdown {
-  width: 98%;
-  margin-right: 5px;
-  .avatar {
-    display: inline-block;
-  }
+	width: 98%;
+	margin-right: 5px;
+	.avatar {
+		display: inline-block;
+	}
 }
 
-.inverse-dropdown{
-  margin-top: 12px !important;
-  background-color: #222;
-  border-color: #080808;
-  li {
-    margin: 10px 10px 5px 10px;
-  }
-  &>li>a{
-    color: #999;
-    &:hover{
-      color: #fff;
-      background-color: #555;
-    }
-  }
-  &>li>button {
-    box-shadow: none;
-  }
+.inverse-dropdown {
+	margin-top: 12px !important;
+	background-color: #222;
+	border-color: #080808;
+	li {
+		margin: 10px 10px 5px 10px;
+	}
+	& > li > a {
+		color: #999;
+		&:hover {
+			color: #fff;
+			background-color: #555;
+		}
+	}
+	& > li > button {
+		box-shadow: none;
+	}
 }
 
 .login-options {
-  width: 300px;
+	width: 300px;
 }
 
 .carousel-caption {
-  z-index: 10;
+	z-index: 10;
 }
 
 .carousel-inner > .item > img {
-  position: absolute;
-  left: 0;
-  min-width: 100%;
-  height: 500px;
+	position: absolute;
+	left: 0;
+	min-width: 100%;
+	height: 500px;
 }
 
 .carousel-inner > .item {
-  height: 500px;
+	height: 500px;
 }
 
 .caption-txt {
-  color: #000;
+	color: #000;
 }
 
-
 #myCarousel .carousel-indicators > li {
-  background-color: #999;
+	background-color: #999;
 }
 
 #myCarousel .carousel-indicators > li.active {
-  background-color: #000;
+	background-color: #000;
 }
 
 .padded {
-  padding: 50px 15px;
+	padding: 50px 15px;
 }
 
 .join-us-btn {
-  box-shadow: none;
-  margin-top: 2px;
-  text-transform: uppercase;
-  width: 200px;
-  background-color: transparent;
-  color: #000;
-  border-color: #D14512;
+	box-shadow: none;
+	margin-top: 2px;
+	text-transform: uppercase;
+	width: 200px;
+	background-color: transparent;
+	color: #000;
+	border-color: #D14512;
 }
 
 .join-us-btn:hover {
-  background-color: #0D2C04;
+	background-color: #0D2C04;
 }
 
 .bmargin {
-  margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .blog h1 a {
-  color: #4b8575;
+	color: #4b8575;
 }
 
 .blog p a {
-  color: #ed7337;
+	color: #ed7337;
 }
 
 .post-list-item,
 .topic-list-item {
-  border-bottom: 1px dashed #ccc;
-  margin-bottom: 10px;
+	border-bottom: 1px dashed #ccc;
+	margin-bottom: 10px;
 }
 
 .topic-header {
-  padding-top: 10px;
+	padding-top: 10px;
 }
 
-.topic-vote {
-  padding-top: 20px;
-}
 .ftr {
-  background: url(/images/shattered.png) repeat;
-  padding: 80px 0 60px 0;
-  width: 100%;
+	background: url(/images/shattered.png) repeat;
+	padding: 80px 0 60px 0;
+	width: 100%;
 }
 
 .ftr address, .ftr a, .ftr p {
-  color: #fff;
+	color: #fff;
 }
 
 .ft_space {
-  padding: 0 10px;
+	padding: 0 10px;
 }
 
 .event-attend {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
-  padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+	padding: 10px 0;
 }
 
 .event-attend a {
-  width: 100%
+	width: 100%
 }
 
 .event-attendees {
-  border-bottom: 1px dashed #ccc;
-  margin-bottom: 10px;
+	border-bottom: 1px dashed #ccc;
+	margin-bottom: 10px;
 }
 
 .event-attendee-image {
-  padding-bottom: 10px;
+	padding-bottom: 10px;
 }
 
 .event-attendee-name {
-  padding-top: 20px;
+	padding-top: 20px;
 }
 
 .events-description {
-  padding: 0 10px;
-  margin: 30px 0;
+	padding: 0 10px;
+	margin: 30px 0;
 }
 
 .events {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .panel-body {
-  padding: 0 0;
+	padding: 0 0;
 }
 
 .breadcrumb {
-  margin-top: 40px;
+	margin-top: 40px;
 }
 
 .margin-btm {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .margin-tp {
-  margin-top: 30px;
+	margin-top: 30px;
 }
 
 .glyphicon-circle-arrow-up {
-  font-size: 32px;
+	font-size: 32px;
 }
 
 .btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 8px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 25px;
-  -moz-border-radius:25px;
-  -webkit-border-radius:25px;
+	width: 50px;
+	height: 50px;
+	padding: 8px 16px;
+	font-size: 24px;
+	line-height: 1.33;
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
 }
 
 /* global button class */
-.smGlobalBtn{
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  box-shadow: 0 2px 2px #999;
-  padding: 0px;
-  text-decoration: none;
-  text-align: center;
-  color: #fff;
-  font-size: 25px;
-  font-weight: normal;
-  line-height: 2em;
-  border-radius: 25px;
-  -moz-border-radius:25px;
-  -webkit-border-radius:25px;
+.smGlobalBtn {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	box-shadow: 0 2px 2px #999;
+	padding: 0px;
+	text-decoration: none;
+	text-align: center;
+	color: #fff;
+	font-size: 25px;
+	font-weight: normal;
+	line-height: 2em;
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
 }
 
 /* facebook button class*/
-.btn-facebook{
-  background: #4060A5;
+.btn-facebook {
+	background: #4060A5;
 }
 
-.btn-facebook:before{ /* use :before to add the relevant icons */
-  font-family: "FontAwesome";
-  content: "\f09a"; /* add facebook icon */
+.btn-facebook:before {
+	/* use :before to add the relevant icons */
+	font-family: "FontAwesome";
+	content: "\f09a"; /* add facebook icon */
 }
 
-.btn-facebook:hover{
-  color: #4060A5;
-  background: #fff;
+.btn-facebook:hover {
+	color: #4060A5;
+	background: #fff;
 }
 
 /* twitter button class*/
-.btn-twitter{
-  background: #00ABE3;
+.btn-twitter {
+	background: #00ABE3;
 }
 
-.btn-twitter:before{
-  font-family: "FontAwesome";
-  content: "\f099"; /* add twitter icon */
+.btn-twitter:before {
+	font-family: "FontAwesome";
+	content: "\f099"; /* add twitter icon */
 }
 
-.btn-twitter:hover{
-  color: #00ABE3;
-  background: #fff;
+.btn-twitter:hover {
+	color: #00ABE3;
+	background: #fff;
 }
 
 /* google plus button class*/
-.btn-googleplus{
-  background: #e64522;
+.btn-googleplus {
+	background: #e64522;
 }
 
-.btn-googleplus:before{
-  font-family: "FontAwesome";
-  content: "\f0d5"; /* add googleplus icon */
+.btn-googleplus:before {
+	font-family: "FontAwesome";
+	content: "\f0d5"; /* add googleplus icon */
 }
 
-.btn-googleplus:hover{
-  color: #e64522;
-  background: #fff;
+.btn-googleplus:hover {
+	color: #e64522;
+	background: #fff;
 }
 
 .what-we-do {
-  background-color: #fafafa;
+	background-color: #fafafa;
 }
 
+@media (min-width: 768px) {
+	.carousel-caption > .item {
+		height: 600px;
+	}
 
+	.breadcrumb {
+		//    margin-top: 20px;
+	}
 
-@media(min-width: 768px) {
-  .carousel-caption > .item {
-    height: 600px;
-  }
-  .breadcrumb {
-//    margin-top: 20px;
-  }
-  .profileName {
-    margin-left: 15px;
-  }
+	.profileName {
+		margin-left: 15px;
+	}
 }
 
-@media(max-width: 768px) {
-  .profileName {
-    text-align: center;
-  }
-  .profPic-container {
-    width: 300px;
-    height: 300px;
-    padding-bottom: 0;
-  }
-  .profileName {
-    font-size: 48px;
-  }
+@media (max-width: 768px) {
+	.profileName {
+		text-align: center;
+	}
+
+	.profPic-container {
+		width: 300px;
+		height: 300px;
+		padding-bottom: 0;
+	}
+
+	.profileName {
+		font-size: 48px;
+	}
 }
 
-@media(min-width: 768px) and (max-width: 992px) {
-  .navbar > .container {
-    width: 768px;
-  }
+@media (min-width: 768px) and (max-width: 992px) {
+	.navbar > .container {
+		width: 768px;
+	}
 }
 
-@media(min-width: 768px) and (max-width: 1200px) {
-  .thumbnailContainer {
-    width: 190px;
-    height: 190px;
-  }
+@media (min-width: 768px) and (max-width: 1200px) {
+	.thumbnailContainer {
+		width: 190px;
+		height: 190px;
+	}
 }
