@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run with SpyJS" type="JavaScriptNodeJsTraceType" factoryName="Spy-js for Node.js" config="" node="/usr/local/bin/node" node-params="" app="client/main.js" app-params="" working-dir="$PROJECT_DIR$" proxy-port="3547" pass-parent-env="true">
-    <envs />
-    <RunnerSettings RunnerId="JavaScriptTraceRunner" />
-    <ConfigurationWrapper RunnerId="JavaScriptTraceRunner" />
-    <method />
-  </configuration>
-</component>
