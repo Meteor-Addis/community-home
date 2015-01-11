@@ -57,11 +57,6 @@ Router.route('user/:_id', function() {
 if (Meteor.isClient) {
     Meteor.subscribe("users");
 
-    //Meteor.autorun(function() {
-    //    var width = $('.profPic-container').width();
-    //    $('.profPic-container').css({'height':width+'px'});
-    //});
-
     Template.members.helpers({
         allUsers: function() {
             return Users.find({}, {sort: {"profile.name": 1}});
@@ -112,8 +107,6 @@ if (Meteor.isClient) {
             var email = template.find('.email-input').value;
             var password = template.find('.password-input').value;
 
-            console.log(email, password);
-
             Meteor.loginWithPassword(email, password, function(err) {
                 if (err) {
                     throw new Meteor.Error("Password login failed");
@@ -157,8 +150,6 @@ if (Meteor.isClient) {
                 }
 
             });
-
-            return false;
         },
 
         "click .changePassword": function(event, template) {
