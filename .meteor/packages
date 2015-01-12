@@ -13,7 +13,6 @@ service-configuration
 ian:bootstrap-3
 iron:router
 ian:accounts-ui-bootstrap-3
-autopublish
 bengott:avatar
 jquery
 http

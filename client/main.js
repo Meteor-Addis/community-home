@@ -161,7 +161,7 @@ if (Meteor.isClient) {
 
             Meteor.call('deleteUser', id);
 
-            Router.go('/index.html');
+            Router.go('/index');
 
         },
 

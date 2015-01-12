@@ -20,8 +20,8 @@ if (env == "development") {
 
     ServiceConfiguration.configurations.insert({
         service: 'facebook',
-        appId: '1586727228211595',
-        secret: 'd902296d9fb732b9e8d66e71c5595707'
+        appId: '1606740522889044',
+        secret: '3e12cff4f38f3b3f55241bb6bd79a8bb'
     });
 
     ServiceConfiguration.configurations.remove({
