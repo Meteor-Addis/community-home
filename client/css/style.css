@@ -238,10 +238,10 @@ hr {
 
 #login-dropdown {
   width: 98%;
+  height: 66px;
   margin: 0;
   border: none;
   border-radius: 0;
-  height: 60px;
 }
 
 #login-dropdown .avatar {
@@ -251,7 +251,6 @@ hr {
 }
 
 .inverse-dropdown {
-  margin-top: 12px !important;
   background-color: #222;
   border-color: #080808;
 }
