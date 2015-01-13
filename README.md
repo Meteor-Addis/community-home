@@ -18,7 +18,7 @@ This is the file structure.
 │       │   └── layout.html
 │       └── views
 │           ├── auth
-│           │   ├── auth.js
+│           │   ├── login.js
 │           │   └── login.html
 │           ├── blogs
 │           │   ├── blogs.html
