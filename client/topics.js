@@ -19,6 +19,7 @@ if (Meteor.isClient) {
 		"click .topic-vote-btn": function () {
 
 			if (Meteor.userId() != this.owner) {
+
 				if (TopicVotes.find({voter: Meteor.userId(), topic: this._id}).count() > 0) {
 
 					Meteor.call("removeVoteForTopic", this._id);
@@ -57,21 +58,29 @@ if (Meteor.isClient) {
 
 	Template.topics.helpers({
    topics: function () {
-	   return Topics.find({presented: {$ne: true}}, {sort: {votes: -1}});
+	   return Topics.find({presented: {$ne: true}}, {sort: {votes: -1, createdAt: -1}});
    },
 
    suggested: function () {
-	   return Topics.find({presented: {$ne: true}}, {sort: {votes: -1}});
+	   return Topics.find({}, {sort: {votes: -1, createdAt: -1}});
    },
 
    presented: function () {
-	   return Topics.find({presented: {$ne: false}}, {sort: {votes: -1}});
-   }
+	   return Topics.find({presented: {$ne: false}}, {sort: {votes: -1, createdAt: -1}});
+   },
+
+		noSuggested: function () {
+			return Topics.find({}, {sort: {votes: -1}}).count() == 0;
+		},
+
+		noPresented: function () {
+			return Topics.find({presented: {$ne: false}}, {sort: {votes: -1, createdAt: -1}}).count() == 0;
+		}
  });
 
 	Template.home.helpers({
    topics: function () {
-	   return Topics.find({}, {sort: {votes: -1}, limit: 5});
+	   return Topics.find({}, {sort: {votes: -1, createdAt: -1}, limit: 5});
    },
 
 		getName: function () {
@@ -94,7 +103,7 @@ if (Meteor.isClient) {
 		},
 
    hasVoted: function () {
-     var r = TopicVotes.find({voter: Meteor.userId(), topic: this._id}).count() != 0;
+     var r = TopicVotes.find({voter: Meteor.userId(), topic: this._id}).count() > 0;
 
 	   return r;
    }

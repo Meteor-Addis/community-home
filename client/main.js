@@ -68,7 +68,7 @@ if (Meteor.isClient) {
 			});
 		},
 
-		"click #signIn": function (event, template) {
+		"click #sign-in": function (event, template) {
 			event.preventDefault();
 
 			var email = template.find('.email-input').value;
@@ -86,22 +86,22 @@ if (Meteor.isClient) {
 		"click #register": function (event) {
 			event.preventDefault();
 
-			$('.signInForm').css('display', 'none');
-			$('.registrationForm').css('display', 'block');
+			$('.sign-in-form').css('display', 'none');
+			$('.registration-form').css('display', 'block');
 
 			return false;
 		},
 
-		"click #cancelRegister": function (event) {
+		"click #cancel-register": function (event) {
 			event.preventDefault();
 
-			$('.registrationForm').css('display', 'none');
-			$('.signInForm').css('display', 'block');
+			$('.registration-form').css('display', 'none');
+			$('.sign-in-form').css('display', 'block');
 
 			return false;
 		},
 
-		'click #createUser': function (event, template) {
+		'click #create-user': function (event, template) {
 			event.preventDefault();
 
 			var first = template.find('.fName-input').value;

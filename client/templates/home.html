@@ -21,8 +21,8 @@
 						</h3>
 
 						<p>
-							<a class="btn btn-primary btn-lg join-us-btn" href="#">
-								<strong>JOIN US!</strong>
+							<a class="btn btn-lg join-us-btn" href="#">
+								JOIN US!
 							</a>
 						</p>
 					</div>
@@ -66,8 +66,9 @@
 				consectetur dolore nostrum obcaecati, ipsum, rem harum tempore tenetur veniam dolor eius incidunt architecto vel
 				modi. Nemo, aliquid, a?</p>
 			<hr>
+
 			<div class="col-md-6"> <!-- Events -->
-				<h2 class="text-center margin-btm">Events</h2>
+				<h2 class="text-center margin-btm">Upcoming Events</h2>
 
 				<div class="media">
 					<div class="panel panel-default text-center">
@@ -93,17 +94,20 @@
 							voluptates?</p>
 
 						<p class="text-center margin-tp">
-							<a class="btn btn-primary btn-lg" href="event-detail">View Event Details</a>
+							<a class="pull-right" href="events">
+								View More Events
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
 						</p>
 					</div>
 				</div>
 			</div>
 			<!-- End Events -->
 			<div class="col-md-6"><!-- Topics -->
-				<h2 class="text-center margin-btm">Topics</h2>
-				<ul>
+				<h2 class="text-center margin-btm">Discussion Topics</h2>
+				<div>
 					{{#each topics}}
-					<li>
+					<div>
 						<h3>
 							<a href="#">{{title}}</a>
 						</h3>
@@ -114,14 +118,17 @@
 						<p class="text-muted">
 							<small>
 								{{votes}} Votes &bull;
-								Suggested by {{getName}} &bull; {{formatDate createdAt "short"}}
+								Suggested by {{getName}} on {{formatDate createdAt "short"}}
 							</small>
 						</p>
-					</li>
+					</div>
 					{{/each}}
-				</ul>
+				</div>
 				<p class="text-center margin-tp">
-					<a class="btn btn-primary btn-lg" href="topics">View Topic Details</a>
+					<a class="pull-right" href="topics">
+						View More Topics
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
 				</p>
 			</div>
 			<!-- End Topics -->

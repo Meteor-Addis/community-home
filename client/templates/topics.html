@@ -1,26 +1,13 @@
 
 <template name="topics">
-	<!-- Page Header Breadcrumb -->
 	<div class="container">
-		<ul class="breadcrumb">
-			<li>
-				<a href="index">Home</a>
-				<span class="divider"></span>
-			</li>
-			<li class="active">Topics</li>
-		</ul>
-
-		<div class="page-header"><!-- Page Header -->
-			<h1>TOPICS.
-				<small>Suggest topics for a meet-up</small>
+		<div class="page-header">
+			<h1>
+				TOPICS .
+				<small>suggested for a meet up</small>
 			</h1>
 		</div>
-		<!-- End Page Header -->
-	</div>
-	<!-- End Page Header Breadcrumb -->
 
-
-	<div class="container">
 		{{#if currentUser}}
 			<div class="col-md-10 col-md-offset-1">
 				<div class="pull-right">
@@ -47,17 +34,25 @@
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="suggested">
 						<div class="col-md-10 col-md-offset-1">
-							{{#each suggested}}
-								{{> topic}}
-							{{/each}}
+							{{#if noSuggested}}
+								<div class="text-center text-muted nothing-to-show">Nothing suggested yet</div>
+							{{else}}
+								{{#each suggested}}
+									{{> topic}}
+								{{/each}}
+							{{/if}}
 						</div>
 					</div>
 
 					<div class="tab-pane fade in" id="presented">
 						<div class="col-md-10 col-md-offset-1">
-							{{#each presented}}
-								{{> topic}}
-							{{/each}}
+							{{#if noPresented}}
+								<div class="text-center text-muted nothing-to-show">Nothing presented yet</div>
+							{{else}}
+								{{#each presented}}
+									{{> topic}}
+								{{/each}}
+							{{/if}}
 						</div>
 					</div>
 				</div>
@@ -70,6 +65,11 @@
 	<div class="topic-list-item">
 		<div class="row">
 			<div class="col-xs-1 topic-vote {{#if hasVoted}}topic-vote-voted{{/if}} {{#if isOwner}}topic-vote-owned{{/if}}">
+
+				{{#if presented}}
+					<span class="glyphicon glyphicon-ok topic-presented-tag center-block"></span>
+				{{/if}}
+
 				<div class="topic-vote-btn">
 					<span class="glyphicon glyphicon-chevron-up"></span>
 				</div>
