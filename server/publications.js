@@ -7,7 +7,7 @@ Meteor.publish("topics", function () {
 });
 
 
-Meteor.publish("topicVotes", function () {
+Meteor.publish("topic-votes", function () {
     return TopicVotes.find();
 });
 

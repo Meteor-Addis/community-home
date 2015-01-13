@@ -102,34 +102,23 @@
 			<div class="col-md-6"><!-- Topics -->
 				<h2 class="text-center margin-btm">Topics</h2>
 				<ul>
+					{{#each topics}}
 					<li>
 						<h3>
-							<a href="#">Meteor API</a>
-							<small> (5000 Points)</small>
+							<a href="#">{{title}}</a>
 						</h3>
-						<p class="text-muted">Suggested by Jone Doe on September 24, 2014 at 11:00 AM</p>
+						<p>
+							{{description}}
+						</p>
+
+						<p class="text-muted">
+							<small>
+								{{votes}} Votes &bull;
+								Suggested by {{getName}} &bull; {{formatDate createdAt "short"}}
+							</small>
+						</p>
 					</li>
-					<li>
-						<h3>
-							<a href="#">Methods</a>
-							<small> (500 Points)</small>
-						</h3>
-						<p class="text-muted">Suggested by Jone Doe on September 24, 2014 at 11:00 AM</p>
-					</li>
-					<li>
-						<h3>
-							<a href="#">Routing</a>
-							<small> (150 Points)</small>
-						</h3>
-						<p class="text-muted">Suggested by Jone Doe on September 24, 2014 at 11:00 AM </p>
-					</li>
-					<li>
-						<h3>
-							<a href="#">Publish/Subscribe</a>
-							<small> (50 Points)</small>
-						</h3>
-						<p class="text-muted">Suggested by Jone Doe on September 24, 2014 at 11:00 AM</p>
-					</li>
+					{{/each}}
 				</ul>
 				<p class="text-center margin-tp">
 					<a class="btn btn-primary btn-lg" href="topics">View Topic Details</a>

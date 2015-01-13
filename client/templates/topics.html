@@ -21,6 +21,22 @@
 
 
 	<div class="container">
+		{{#if currentUser}}
+			<div class="col-md-10 col-md-offset-1">
+				<div class="pull-right">
+					<button class="btn btn-success new-topic-form-switch">
+						<span class="glyphicon glyphicon-plus"></span>
+						Suggest a Topic
+					</button>
+				</div>
+				<form class="new-topic" style="display: none;">
+					<input class="pull-left col-xs-12 form-control" type="text" name="title" placeholder="Topic title"/>
+					<textarea class="pull-left col-xs-12 form-control" placeholder="Topic description" name="description"></textarea>
+					<input class="pull-right btn-success btn-lg" type="submit" value="Add Suggestion">
+				</form>
+			</div>
+		{{/if}}
+
 		<div class="row">
 			<div class="col-md-12 tabbable">
 				<ul id="myTab" class="nav nav-tabs">
@@ -30,67 +46,61 @@
 
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="suggested">
-						{{#if currentUser}}
-							<div class="col-md-10 col-md-offset-1">
-								<form class="new-topic">
-									<input class="pull-left col-xs-12 form-control" type="text" name="title" placeholder="Topic title"/>
-									<textarea class="pull-left col-xs-12 form-control" placeholder="Topic description" name="description"></textarea>
-									<input class="pull-right btn-success btn-lg" type="submit" value="Add Suggestion">
-								</form>
-							</div>
-						{{/if}}
-
 						<div class="col-md-10 col-md-offset-1">
-							{{#each topics}}
-								<div class="topic-list-item">
-									<div class="row">
-										<div class="col-xs-1 topic-vote {{#if hasVoted}}topic-vote-voted{{/if}} {{#if isOwner}}topic-vote-owned{{/if}}">
-											<div class="topic-vote-btn">
-												<span class="glyphicon {{#if hasVoted}}glyphicon-ok{{else}}glyphicon-chevron-up{{/if}}"></span>
-											</div>
-											<div class="topic-vote-count">
-												{{votes}}
-											</div>
-										</div>
-										<div class="col-xs-11">
-											<h1 class="topic-header">
-												<a href="#">{{title}}</a>
-											</h1>
-
-											<p>{{description}}</p>
-
-											<p class="text-muted topic-info">
-												Suggested by <strong>{{name}}</strong> on {{createdAt}}
-											</p>
-											{{#if currentUser}}
-												{{#if isOwner}}
-												<div>
-													<button class="topic-delete-btn pull-right"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-												</div>
-												{{/if}}
-											{{/if}}
-										</div>
-									</div>
-								</div>
+							{{#each suggested}}
+								{{> topic}}
 							{{/each}}
 						</div>
 					</div>
+
 					<div class="tab-pane fade in" id="presented">
-						<div class="col-md-10 col-md-offset-1 topic-header">
-							<p class="well text-center">Suggested topic for the meet-up and presented.</p>
-						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<section class="topic-list-item">
-								<h1><a href="#">Publish/Subscribe</a></h1>
-
-								<p class="text-muted">Presented by Jone Doe on September 24, 2014 at 11:00 AM</p>
-
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-									et dolore magna aliqua.</p>
-							</section>
+							{{#each presented}}
+								{{> topic}}
+							{{/each}}
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="topic">
+	<div class="topic-list-item">
+		<div class="row">
+			<div class="col-xs-1 topic-vote {{#if hasVoted}}topic-vote-voted{{/if}} {{#if isOwner}}topic-vote-owned{{/if}}">
+				<div class="topic-vote-btn">
+					<span class="glyphicon glyphicon-chevron-up"></span>
+				</div>
+				<div class="topic-vote-count">
+					{{votes}}
+				</div>
+			</div>
+			<div class="col-xs-11">
+				<h1 class="topic-header">
+					<a href="#">{{title}}</a>
+				</h1>
+
+				<p>{{description}}</p>
+
+				<p class="text-muted topic-info">
+					By <strong><a href="/user/{{owner}}">{{getName}}</a></strong> &bull; {{formatDate createdAt "short"}}
+				</p>
+
+				{{#if currentUser}}
+					{{#if isOwner}}
+					<div>
+						<button class="topic-delete-btn btn-danger pull-right topic-right-btn"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+						<button class="topic-edit-btn pull-right topic-right-btn"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+						{{#if presented}}
+							<button class="topic-not-presented-btn pull-right topic-right-btn"><span class="glyphicon glyphicon-remove"></span> Not Presented</button>
+						{{else}}
+							<button class="topic-presented-btn pull-right topic-right-btn"><span class="glyphicon glyphicon-ok"></span> Set Presented</button>
+						{{/if}}
+					</div>
+					{{/if}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

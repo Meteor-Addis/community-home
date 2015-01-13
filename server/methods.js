@@ -1,10 +1,16 @@
 Topics = new Mongo.Collection("topics");
-TopicVotes = new Mongo.Collection("topicVotes");
+TopicVotes = new Mongo.Collection("topic-votes");
 
 Meteor.methods({
 	deleteUser: function (id) {
 		if (Meteor.userId() == id) {
+			// delete associated topics
+			Topics.remove({owner: id});
+
+			TopicVotes.remove({voter: id});
+
 			Meteor.users.remove({_id: id});
+
 			return true;
 		}
 
@@ -24,8 +30,8 @@ Meteor.methods({
 			description: description,
 			createdAt: new Date(),
 			owner: Meteor.userId(),
-			name: Meteor.user().name,
-			votes: 0
+			votes: 0,
+			presented: false
 		});
 	},
 
@@ -64,5 +70,24 @@ Meteor.methods({
 		}
 
 		Topics.remove(topicId);
+	},
+
+	setTopicPresented: function (topicId, presented) {
+
+		var topic = Topics.findOne(topicId);
+
+		if (!Meteor.userId() || Meteor.userId() !== topic.owner) {
+			throw new Meteor.Error("not-authorized");
+		}
+
+		Topics.update(topicId, {$set: {presented: presented}});
 	}
+});
+
+Meteor.publish("topics", function () {
+	return Topics.find({}, {sort: {votes: -1}});
+});
+
+Meteor.publish("topic-votes", function () {
+	return TopicVotes.find();
 });

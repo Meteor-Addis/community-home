@@ -64,3 +64,11 @@ Router.route('user/:_id', function () {
 		}
 	});
 });
+
+Router.route('settings', function () {
+	this.render('settings', {
+		data: function () {
+			return Users.findOne({_id: this.params._id});
+		}
+	});
+});
