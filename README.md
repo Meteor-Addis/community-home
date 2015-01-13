@@ -4,6 +4,7 @@ Meteor Addis Community Home
 The community home site for Meteor Addis.
 
 This is the file structure.
+<pre>
 .
 ├── client
 │   ├── addis-meteor-community.html
@@ -53,3 +54,4 @@ This is the file structure.
     ├── methods.js
     ├── publications.js
     └── server.js
+</pre>
