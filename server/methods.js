@@ -1,16 +1,7 @@
-Topics = new Mongo.Collection("topics");
-TopicVotes = new Mongo.Collection("topicVotes");
-
 Meteor.methods({
 	deleteUser: function (id) {
 		if (Meteor.userId() == id) {
-			// delete associated topics
-			Topics.remove({owner: id});
-
-			TopicVotes.remove({voter: id});
-
 			Meteor.users.remove({_id: id});
-
 			return true;
 		}
 
@@ -18,11 +9,10 @@ Meteor.methods({
 			return "Account delete failed";
 		}
 	},
-
-	addTopic: function (title, description) {
+	addNewTopic: function (title, description) {
 
 		if (!Meteor.userId()) {
-			throw new Meteor.Error("not-authorized");
+			return false;
 		}
 
 		Topics.insert({
@@ -30,11 +20,12 @@ Meteor.methods({
 			description: description,
 			createdAt: new Date(),
 			owner: Meteor.userId(),
-			votes: 0,
-			presented: false
+			name: Meteor.user().name,
+			votes: 0
 		});
-	},
 
+		return true;	
+	},
 	voteForTopic: function (topicId) {
 
 		if (!Meteor.userId()) {
@@ -49,7 +40,6 @@ Meteor.methods({
 
 		Topics.update(topicId, {$set: {votes: TopicVotes.find({topic: topicId}).count()}});
 	},
-
 	removeVoteForTopic: function (topicId) {
 
 		if (!Meteor.userId()) {
@@ -60,7 +50,6 @@ Meteor.methods({
 
 		Topics.update(topicId, {$set: {votes: TopicVotes.find({topic: topicId}).count()}});
 	},
-
 	deleteTopic: function (topicId) {
 
 		var topic = Topics.findOne(topicId);
@@ -70,16 +59,5 @@ Meteor.methods({
 		}
 
 		Topics.remove(topicId);
-	},
-
-	setTopicPresented: function (topicId, presented) {
-
-		var topic = Topics.findOne(topicId);
-
-		if (!Meteor.userId() || Meteor.userId() !== topic.owner) {
-			throw new Meteor.Error("not-authorized");
-		}
-
-		Topics.update(topicId, {$set: {presented: presented}});
 	}
 });
