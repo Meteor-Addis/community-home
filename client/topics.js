@@ -1,6 +1,6 @@
 
 Topics = new Mongo.Collection("topics");
-TopicVotes = new Mongo.Collection("topic-votes");
+TopicVotes = new Mongo.Collection("topicVotes");
 
 if (Meteor.isClient) {
 	Meteor.subscribe("topics");
@@ -95,7 +95,6 @@ if (Meteor.isClient) {
 
    hasVoted: function () {
      var r = TopicVotes.find({voter: Meteor.userId(), topic: this._id}).count() != 0;
-	   console.log("false: " + r);
 
 	   return r;
    }

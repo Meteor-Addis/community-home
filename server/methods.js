@@ -1,5 +1,5 @@
 Topics = new Mongo.Collection("topics");
-TopicVotes = new Mongo.Collection("topic-votes");
+TopicVotes = new Mongo.Collection("topicVotes");
 
 Meteor.methods({
 	deleteUser: function (id) {
@@ -82,12 +82,4 @@ Meteor.methods({
 
 		Topics.update(topicId, {$set: {presented: presented}});
 	}
-});
-
-Meteor.publish("topics", function () {
-	return Topics.find({}, {sort: {votes: -1}});
-});
-
-Meteor.publish("topic-votes", function () {
-	return TopicVotes.find();
 });
