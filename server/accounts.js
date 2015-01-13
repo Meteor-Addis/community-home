@@ -85,30 +85,6 @@ Accounts.onCreateUser(function(options, user) {
             // Check if the user's email is not null and if so that it's associated with an existing account
             if (user.services.facebook.email && Users.findOne({'profile.email': user.services.facebook.email})) {
 
-                // THIS METHOD WORKS FOR THE MOST PART. THE ISSUE IS THAT ONCE WE UPDATE EXISTING USER, WE HAVE
-                // TO RETURN A USER IN ORDER TO BE LOGGED IN AUTOMATICALLY. HOWEVER, RETURNING EXISTING USER RESULTS
-                // IN A DUPLICATE KEY ERROR. WE CAN'T RETURN NEW USER BECAUSE THE WHOLE PURPOSE OF THIS CODE IS AVOIDING
-                // CREATING A NEW USER WITH THE SAME EMAIL. ALTERNATIVE IS CREATING A NEW USER WITH PROPERTIES FROM
-                // BOTH EXISTING AND NEW USERS AND RETURNING THAT USER AFTER REMOVING THE EXISTING USER. THE ANTICIPATED
-                // ISSUE WITH THIS METHOD IS THAT FOR THE SPLIT SECOND BETWEEN REMOVING AND INSERTING, OTHER USERS LOOKING
-                // AT THE PROFILE OF THE USER CURRENTLY LOGGING IN COULD SEE AN EMPTY PROFILE BEFORE IT'S REPOPULATED
-                // WITH THE NEW DATA. KEEPING THIS CODE HERE TEMPORARILY. WILL WORK ON FIX IF ALTERNATIVE IS WORSE.
-
-                //var existingUser = Users.find({'profile.email': user.services.facebook.email}).fetch()[0];
-                //var existingUserId = Users.find({'profile.email': user.services.facebook.email}).fetch()[0]._id;
-                //
-                //
-                //var newServices = Users.findOne({'_id': existingUserId}).profile.services.push("facebook");
-                //
-                //Users.update({'_id': existingUserId}, {$set: {'profile.services': newServices}});
-                //Users.update({'_id': existingUserId}, {$set: {'services.facebook': user.services.facebook}});
-                //
-                //if (! existingUser.profile.picture) {
-                //    Users.update({'_id': existingUserId}, {$set: {'profile.picture': "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large&width=500&height=500"}})
-                //}
-                //
-                //return false;
-
                 var existingUser = Users.findOne({'profile.email': user.services.facebook.email});
 
                 existingUser.profile.services.push("facebook");
