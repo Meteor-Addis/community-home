@@ -221,4 +221,3 @@ UI.registerHelper('activeIfCurrent', function (page) {
 	}
 	return "";
 });
-

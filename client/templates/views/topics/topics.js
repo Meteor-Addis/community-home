@@ -1,7 +1,4 @@
 
-Topics = new Mongo.Collection("topics");
-TopicVotes = new Mongo.Collection("topicVotes");
-
 if (Meteor.isClient) {
 	Meteor.subscribe("topics");
 	Meteor.subscribe("topicVotes");
@@ -80,7 +77,7 @@ if (Meteor.isClient) {
 
 	Template.home.helpers({
    topics: function () {
-	   return Topics.find({}, {sort: {votes: -1, createdAt: -1}, limit: 5});
+	   return Topics.find({}, {sort: {votes: -1, createdAt: -1}, limit: 3});
    },
 
 		getName: function () {
