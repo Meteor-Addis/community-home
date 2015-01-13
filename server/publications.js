@@ -6,3 +6,8 @@ Meteor.publish("topics", function () {
 Meteor.publish("topicVotes", function () {
 	return TopicVotes.find({});
 });
+
+
+Meteor.publish("users", function() {
+    return Meteor.users.find({}, {fields: {profile: 1} });
+});
