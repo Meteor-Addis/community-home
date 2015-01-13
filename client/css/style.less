@@ -30,9 +30,10 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
 	color: @theme-main;
+	transition: all 1s;
 
 	&:hover, &:focus {
-		color: darken(@theme-main, 10%);
+		color: darken(@theme-main, 20%);
 		text-decoration: none;
 	}
 
@@ -71,6 +72,11 @@ a {
 .content {
 	padding-top: 30px;
 	padding-bottom: 50px;
+	min-height: 500px;
+}
+
+.profile-content {
+	min-height: 500px;
 }
 
 #sign-in,
@@ -186,7 +192,7 @@ section.parallax {
 }
 
 .profile-header {
-	background: url(/images/shattered.png) repeat;
+	background: url(/images/bg.png) repeat;
 	width: 100%;
 	height: 100%;
 
@@ -358,6 +364,7 @@ section.parallax {
 	background-color: @theme-main;
 	border: 3px solid darken(@theme-main, 10%);
 	font-size: 15px;
+	transition: all 1s;
 
 	&:hover {
 		background-color: #333;
@@ -481,12 +488,68 @@ section.parallax {
 }
 
 .ftr {
-  background: url(/images/shattered.png) repeat;
+	background-color: 444;
+  background: url(/images/bg.png) repeat;
+	background-attachment: fixed;
   padding: 80px 0 60px 0;
   width: 100%;
+	color: #fff;
+	font-weight: 100;
+
   address, a, p {
     color: #ffffff;
   }
+
+	.btn-facebook, .btn-twitter, .btn-googleplus {
+		box-shadow: none;
+		margin: 10px -7px;
+		padding: 0;
+
+		&:before {
+			font-family: "FontAwesome";
+		}
+
+		&:hover {
+			text-decoration: none;
+			background: #fff;
+		}
+	}
+
+	/* facebook button class*/
+	.btn-facebook {
+		&:before {
+			content: "\f09a";
+			/* add facebook icon */
+		}
+
+		&:hover {
+			color: #4060A5;
+		}
+	}
+
+	/* twitter button class*/
+	.btn-twitter {
+		&:before {
+			content: "\f099";
+			/* add twitter icon */
+		}
+
+		&:hover {
+			color: #00ABE3;
+		}
+	}
+
+	/* google plus button class*/
+	.btn-googleplus {
+		&:before {
+			content: "\f0d5";
+			/* add googleplus icon */
+		}
+
+		&:hover {
+			color: #e64522;
+		}
+	}
 }
 
 .ft_space {
@@ -563,7 +626,7 @@ section.parallax {
   width: 50px;
   height: 50px;
   box-shadow: 0 2px 2px #999999;
-  padding: 0px;
+  padding: 0;
   text-decoration: none;
   text-align: center;
   color: #ffffff;
@@ -575,67 +638,28 @@ section.parallax {
   -webkit-border-radius: 25px;
 }
 
-.btn-facebook, .btn-twitter, .btn-googleplus {
-	&:before {
-		font-family: "FontAwesome";
-	}
-
-	&:hover {
-		text-decoration: none;
-		background: #fff;
-	}
-}
-
-/* facebook button class*/
-.btn-facebook {
-	background: #4060A5;
-	&:before {
-		content: "\f09a";
-		/* add facebook icon */
-	}
-
-	&:hover {
-		color: #4060A5;
-	}
-}
-
-/* twitter button class*/
-.btn-twitter {
-	background: #00ABE3;
-	&:before {
-		content: "\f099";
-		/* add twitter icon */
-	}
-
-	&:hover {
-		color: #00ABE3;
-	}
-}
-
-/* google plus button class*/
-.btn-googleplus {
-	background: #e64522;
-	&:before {
-		content: "\f0d5";
-		/* add googleplus icon */
-	}
-
-	&:hover {
-		color: #e64522;
-	}
-}
-
 .what-we-do {
 	background-color: #fafafa;
+}
+
+.sponsors {
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .carousel-main {
 	color: #fff;
 	background-color: #222;
 
+	.carousel-center-img {
+		max-width: 300px;
+		margin-bottom: 40px;
+	}
+
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 100;
 		color: #fff;
+		margin-bottom: 40px;
 	}
 }
 
