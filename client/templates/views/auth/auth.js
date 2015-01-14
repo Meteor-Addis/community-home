@@ -139,7 +139,7 @@ Template.login.events({
 
         Meteor.call('deleteUser', id);
 
-        Router.go('/index.html');
+        Router.go('/');
 
     },
 

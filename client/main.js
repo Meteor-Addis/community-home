@@ -201,11 +201,45 @@ if (Meteor.isClient) {
 
 var DateFormats = {
 	short: "MMMM DD, YYYY",
-	long: "dddd DD.MM.YYYY HH:mm",
-	year: "YYYY"
+	long: "dddd DD MMM YYYY - HH:mm A",
+	year: "YYYY",
+	weekDay: "dddd",
+	day: "DD",
+	month: "MMMM"
 };
 
+function nthDay(d) {
+	if(d>3 && d<21) return 'th';
+ switch (d % 10) {
+       case 1:  return "st";
+       case 2:  return "nd";
+       case 3:  return "rd";
+       default: return "th";
+   }
+}
+
+UI.registerHelper("peopleOrPerson", function (count) {
+
+	if (count == 1) {
+		return "person is";
+	} else {
+		return "people are";
+	}
+});
+
 UI.registerHelper("formatDate", function (datetime, format) {
+
+	if (moment) {
+		f = DateFormats[format];
+		return moment(datetime).format(f);
+	}
+
+	else {
+		return datetime;
+	}
+});
+
+UI.registerHelper("formatTime", function (time, format) {
 	if (moment) {
 		f = DateFormats[format];
 		return moment(datetime).format(f);

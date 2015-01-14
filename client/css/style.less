@@ -1,6 +1,9 @@
 // TODO: Fix buggy responsiveness. Eg. When reducing window width, navbar-right items jump underneath navbar-brand and profile name has unpredictable behaviour
 
 @theme-main: #dd302c;
+@bg: #f8f8f8;
+@ok-green: #88cc00;
+@no-red: #dd5533;
 
 html {
 	height: 100%;
@@ -14,6 +17,7 @@ body {
 	padding: 0;
 	height: 100%;
 	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	background-color: @bg;
 }
 
 header {
@@ -30,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
 	color: @theme-main;
-	transition: all 1s;
+	transition: all 0.8s;
 
 	&:hover, &:focus {
 		color: darken(@theme-main, 20%);
@@ -39,6 +43,53 @@ a {
 
 	&:visited {
 		color: @theme-main;
+	}
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.btn-primary {
+	background-color: @theme-main;
+	color: #fff !important;
+	border: none;
+
+	&:hover, &:focus {
+		background-color: darken(@theme-main, 10%);
+	}
+}
+
+.gray-link {
+	box-shadow: none !important;
+	border: none;
+	color: #666;
+}
+
+.event {
+	border-bottom: dashed 1px #ddd;
+	padding: 10px;
+	overflow: auto;
+	.event-rsvp-btn {
+		color: #aaa;
+
+		&:hover {
+			color: @ok-green;
+		}
+	}
+}
+
+.rsvpd {
+	color: @ok-green;
+
+	&:hover {
+		color: @no-red;
+
+		.glyphicon-ok:before {
+			content: "\e014";
+		}
 	}
 }
 
@@ -309,7 +360,7 @@ section.parallax {
 
 			&:hover {
 				color: #666;
-				background-color: #aaa;
+				background-color: #ddd;
 			}
 		}
 
@@ -350,6 +401,14 @@ section.parallax {
 	background-color: #000000;
 }
 
+.nav-tabs {
+	li.active {
+		a, a:hover, a:focus {
+			background-color: @bg;
+		}
+	}
+}
+
 .padded {
 	padding: 50px 15px;
 }
@@ -385,8 +444,11 @@ section.parallax {
 	color: #ed7337;
 }
 
-.new-topic {
-	margin-top: 15px;
+.new-topic, .new-event {
+	padding: 15px 0;
+	width: 100%;
+	overflow: auto;
+
 	input, textarea {
 		margin: 5px 0;
 	}
@@ -425,14 +487,15 @@ section.parallax {
 	text-align: center;
 	padding-top: 12px;
 	cursor: pointer;
+	transition: all 0.8s;
 
 	span:before {
 		margin-left: 2px;
 	}
 
 	&:hover {
-		color: #88cc00;
-		border-color: #88cc00;
+		color: @ok-green;
+		border-color: @ok-green;
 	}
 
 	.glyphicon {
@@ -455,14 +518,27 @@ section.parallax {
 
 .topic-vote-voted {
 	.topic-vote-btn, .topic-vote-count {
-	  color: #88cc00;
-	  border-color: #88cc00;
+	  color: @ok-green;
+	  border-color: @ok-green;
+	}
+
+	.topic-vote-btn {
+
+		&:hover {
+			color: @no-red;
+			border-color: @no-red;
+
+			.glyphicon:before {
+				content: "\e014";
+				margin-top: 3px;
+			}
+		}
 	}
 }
 
 .topic-vote-owned > .topic-vote-btn:hover {
-  color: #dd5533;
-  border-color: #dd5533;
+  color: @no-red;
+  border-color: @no-red;
 }
 
 .topic-right-btn {
@@ -481,7 +557,7 @@ section.parallax {
 }
 
 .topic-presented-tag {
-	color: #88cc00;
+	color: @ok-green;
 	width: 100%;
 	text-align: center;
 	font-size: 20px;
@@ -500,20 +576,28 @@ section.parallax {
     color: #ffffff;
   }
 
-	.btn-facebook, .btn-twitter, .btn-googleplus {
-		box-shadow: none;
-		margin: 10px -7px;
-		padding: 0;
+	.social-buttons {
 
-		&:before {
-			font-family: "FontAwesome";
+		li {
+			margin: 10px 0;
+			padding: 0;
 		}
 
-		&:hover {
-			text-decoration: none;
-			background: #fff;
+		.btn-facebook, .btn-twitter, .btn-googleplus, .btn-github {
+			box-shadow: none;
+			padding: 0;
+
+			&:before {
+				font-family: "FontAwesome";
+			}
+
+			&:hover {
+				text-decoration: none;
+				background: #fff;
+			}
 		}
 	}
+
 
 	/* facebook button class*/
 	.btn-facebook {
@@ -531,7 +615,6 @@ section.parallax {
 	.btn-twitter {
 		&:before {
 			content: "\f099";
-			/* add twitter icon */
 		}
 
 		&:hover {
@@ -543,11 +626,21 @@ section.parallax {
 	.btn-googleplus {
 		&:before {
 			content: "\f0d5";
-			/* add googleplus icon */
 		}
 
 		&:hover {
 			color: #e64522;
+		}
+	}
+
+	/* github button class*/
+	.btn-github {
+		&:before {
+			content: "\f09b";
+		}
+
+		&:hover {
+			color: #333;
 		}
 	}
 }
@@ -581,6 +674,11 @@ section.parallax {
 .events-description {
   padding: 0 10px;
   margin: 30px 0;
+}
+
+.event-description {
+	max-height: 50px;
+	.truncate;
 }
 
 .events {
@@ -636,10 +734,6 @@ section.parallax {
   border-radius: 25px;
   -moz-border-radius: 25px;
   -webkit-border-radius: 25px;
-}
-
-.what-we-do {
-	background-color: #fafafa;
 }
 
 .sponsors {

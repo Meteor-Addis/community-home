@@ -3,283 +3,84 @@
 		<div class="page-header">
 			<h1>
 				EVENTS .
-				<small>we are hosting</small>
+				<small>we are organizing</small>
 			</h1>
 		</div>
 
+		{{#if currentUser}}
+			<div class="col-md-10 col-md-offset-1 container row">
+				<div class="pull-right">
+					<button class="btn btn-success new-event-form-switch">
+						<span class="glyphicon glyphicon-plus"></span>
+						Add an Event
+					</button>
+				</div>
+				<form class="new-event" style="display: none;">
+					<input class="pull-left col-xs-12 form-control" type="text" name="title" placeholder="Event title"/>
+					<textarea class="pull-left col-xs-12 form-control" placeholder="Event description" name="description"></textarea>
+
+					<input type="date" name="date">
+					<input type="time" name="time">
+					<input class="pull-right btn-success btn-lg" type="submit" value="Add Event">
+				</form>
+			</div>
+		{{/if}}
+
 		<div class="row events">
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>18th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>18th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>28th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
+			{{#each events}}
+				{{> event}}
+			{{/each}}
 		</div>
-		<div class="row events">
-			<div class="col-sm-4">
-				<div class="media">
+	</div>
+</template>
+
+<template name="event">
+	<div class="col-sm-6">
+		<div class="event">
+			<div class="media">
+				<div class="col-xs-3">
 					<div class="panel panel-default text-center">
 						<div class="panel-heading">
-							Thursday
+							{{formatDate date "weekDay"}}
 						</div>
 						<div class="panel-body">
-							<h2>18th</h2>
+							<h2>{{formatDate date "day"}}</h2>
 						</div>
 						<div class="panel-footer">
-							December
+							{{formatDate date "month"}}
 						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>18th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
 
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>28th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
+				<div class="media-body col-xs-9">
+					<h3 class="media-heading">
+						<a href="{{pathFor 'event-detail'}}">{{title}}</a>
+					</h3>
+					<h5 class="text-muted">
+						<p><span class="glyphicon glyphicon-calendar"></span> {{formatDate date "long"}}</p>
+					</h5>
+					<p class="event-description">{{description}}</p>
 
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row events">
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>18th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
+					<p >
+						{{#if hasRsvpd}}
+							<a class="event-rsvp-btn rsvpd gray-link" href="#">
+								<span class="glyphicon glyphicon-ok"></span>
+								Going
+							</a>
+						{{else}}
+							<a class="event-rsvp-btn gray-link" href="#">
+								<span class="glyphicon glyphicon-ok"></span>
+								I'm Going
+							</a>
+						{{/if}}
 
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>18th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="media">
-					<div class="panel panel-default text-center">
-						<div class="panel-heading">
-							Thursday
-						</div>
-						<div class="panel-body">
-							<h2>28th</h2>
-						</div>
-						<div class="panel-footer">
-							December
-						</div>
-					</div>
-					<div class="media-body">
-						<h3 class="media-heading">
-							<a href="{{pathFor 'eventDetail'}}">Meteor Hack Night 2: Beginner + Advanced</a>
-						</h3>
-						<h5 class="text-muted">
-							<p><span class="glyphicon glyphicon-calendar"></span> Thursday December 18th at 1:30AM </p>
-						</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut suscipit eligendi dolore ab. Aliquam quae
-							fuga nulla ipsam. Quam laborum itaque quisquam doloribus doloremque nobis praesentium quis illum enim
-							voluptates?</p>
-
-						<p>
-							<a class="btn btn-primary" href="{{pathFor 'eventDetail'}}">View Details</a>
-						</p>
-					</div>
+						{{#if someRsvps}}
+							<div class="text-muted small">
+								<span class="glyphicon glyphicon-user"></span> {{rsvps}} {{peopleOrPerson rsvps}} going
+							</div>
+						{{/if}}
+					</p>
+					<a class="gray-link pull-right" href="{{pathFor 'event-detail'}}">Details...</a>
 				</div>
 			</div>
 		</div>

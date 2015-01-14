@@ -1,3 +1,11 @@
+Meteor.publish("events", function () {
+	return Events.find({}, {sort: {createdAt: -1}});
+});
+
+Meteor.publish("eventRsvps", function () {
+	return EventRsvps.find({}, {sort: {createdAt: -1}});
+});
+
 Meteor.publish("topics", function () {
 	return Topics.find({}, {sort: {votes: -1}});
 });
