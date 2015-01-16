@@ -52,6 +52,6 @@ This is the file structure.
 └── server
     ├── accounts.js
     ├── methods.js
-    ├── publications.js
+    ├── users.js
     └── server.js
 </pre>

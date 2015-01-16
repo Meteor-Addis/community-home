@@ -8,7 +8,17 @@ if (Meteor.isClient) {
 			var title = event.target.title.value;
 			var description = event.target.description.value;
 
+			if (title == "" || description == "") {
+				alert("The form contains invalid values!");
+
+				return false;
+			}
+
 			Meteor.call("addTopic", title, description);
+
+			// reset the form
+			event.target.text.value = "";
+			event.target.description.value = "";
 
 			return false;
 		},

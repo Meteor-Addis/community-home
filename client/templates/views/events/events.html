@@ -19,8 +19,22 @@
 					<input class="pull-left col-xs-12 form-control" type="text" name="title" placeholder="Event title"/>
 					<textarea class="pull-left col-xs-12 form-control" placeholder="Event description" name="description"></textarea>
 
-					<input type="date" name="date">
-					<input type="time" name="time">
+					<label>dd-mm-yyyy</label>
+					<div>
+						<input type="number" max="31" min="1" name="day" placeholder="dd"> -
+						<input type="number" max="12" min="1" name="month" placeholder="mm"> -
+						<input type="number" max="2016" min="2015" name="year" placeholder="yyyy">
+					</div>
+
+					<label>hh:mm</label>
+					<div>
+						<input type="number" max="12" min="1" name="hour" placeholder="hh"> :
+						<input type="number" max="59" min="0" name="minute" placeholder="mm"> -
+						<select name="ampm">
+							<option value="AM">AM</option>
+							<option value="PM">PM</option>
+						</select>
+					</div>
 					<input class="pull-right btn-success btn-lg" type="submit" value="Add Event">
 				</form>
 			</div>
@@ -39,7 +53,7 @@
 		<div class="event">
 			<div class="media">
 				<div class="col-xs-3">
-					<div class="panel panel-default text-center">
+					<div class="panel panel-default text-center event-calendar">
 						<div class="panel-heading">
 							{{formatDate date "weekDay"}}
 						</div>
@@ -80,8 +94,8 @@
 							</div>
 						{{/if}}
 					</p>
-					<a class="gray-link pull-right" href="{{pathFor 'event-detail'}}">Details...</a>
 				</div>
+				<a class="gray-link pull-right details-link" href="/events/{{_id}}">Details...</a>
 			</div>
 		</div>
 	</div>

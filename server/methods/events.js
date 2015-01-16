@@ -18,7 +18,9 @@ Meteor.methods({
 
 	deleteEvent: function (eventId) {
 
-		// todo: delete event
+		Events.remove({event: eventId});
+		Meteor.call("removeEventRsvp", eventId);
+
 	},
 
 	rsvpEvent: function (eventId) {

@@ -5,12 +5,34 @@ if (Meteor.isClient) {
 
 	Template.events.events({
 		"submit .new-event": function (event) {
-			var title = event.target.title.value;
-			var description = event.target.description.value;
-			var date = new Date(event.target.date.value + " " + event.target.time.value).getTime();
+			var t = event.target;
 
+			var title = t.title.value;
+			var description = t.description.value;
 
-			Meteor.call("addEvent", title, description, date);
+			var year = t.year.value;
+			var month = t.month.value;
+			var day = t.day.value;
+			var hour = t.hour.value;
+			var minute = t.minute.value;
+			var ampm = t.ampm.value;
+
+			var date = year + "-" + month + "-" + day + " " + hour + ":" + minute + " " + ampm;
+			var datetime = Date.parse(date);
+
+			if (
+				title == "" || description == "" || year == "" || month == "" || day == "" ||
+				hour == "" || minute == "" || ampm == ""
+			) {
+
+				alert("The form contains invalid values!");
+
+				return false;
+			}
+
+			Meteor.call("addEvent", title, description, datetime);
+
+			// reset the form
 
 			return false;
 		},
@@ -63,18 +85,6 @@ if (Meteor.isClient) {
    }
  });
 
-	Template.home.helpers({
-   events: function () {
-	   return Events.find({}, {sort: {createdAt: -1}, limit: 3});
-   },
-
-		getName: function () {
-			var user = Users.findOne(this.owner);
-
-			return user.profile.name;
-		}
- });
-
 	Template.event.helpers({
 
    isOwner: function () {
@@ -95,6 +105,21 @@ if (Meteor.isClient) {
    someRsvps: function () {
 
 	   return EventRsvps.find({event: this._id}).count() > 0;
+   }
+ });
+
+	Template.viewEvent.helpers({
+
+   attendees: function () {
+	   var x = EventRsvps.find({event: this._id});
+
+     return x;
+   }
+ });
+
+	Template.home.helpers({
+   events: function () {
+	   return Events.find({date: {$gt: new Date().getTime()}}, {sort: {date: 1}, limit: 3});
    }
  });
 }
