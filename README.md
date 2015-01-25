@@ -3,6 +3,8 @@ Meteor Addis Community Home
 
 The community home site for Meteor Addis.
 
+[addis.meteor.com](http://addis.meteor.com/ "Official Site")
+
 This is the file structure.
 <pre>
 .
