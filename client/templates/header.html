@@ -1,5 +1,5 @@
 
-<template name="header">
+<template name="header" id="top">
 	<!-- Navigation -->
 	<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -27,8 +27,7 @@
 					<li class="{{ activeIfCurrent 'topics'}}"><a href="/topics">Topics</a></li>
 					<li class="{{ activeIfCurrent 'blog'}}"><a href="/blog">Blog</a></li>
 					<li class="{{ activeIfCurrent 'members'}}"><a href="/members">Members</a></li>
-					<li class="btn btn-primary login-btn" style="display:none">{{> loginButtons }}</li>
-					<li>
+					<li class="login-dropdown-item">
 						{{> login }}
 					</li>
 				</ul>
