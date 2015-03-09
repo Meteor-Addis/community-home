@@ -1,0 +1,102 @@
+<template name="events">
+	<div class="container">
+		<div class="page-header">
+			<h1>
+				EVENTS .
+				<small>we are organizing</small>
+			</h1>
+		</div>
+
+		{{#if currentUser}}
+			<div class="col-md-10 col-md-offset-1 container row">
+				<div class="pull-right">
+					<button class="btn btn-success new-event-form-switch">
+						<span class="glyphicon glyphicon-plus"></span>
+						Add an Event
+					</button>
+				</div>
+				<form class="new-event" style="display: none;">
+					<input class="pull-left col-xs-12 form-control" type="text" name="title" placeholder="Event title"/>
+					<textarea class="pull-left col-xs-12 form-control" placeholder="Event description" name="description"></textarea>
+
+					<label>dd-mm-yyyy</label>
+					<div>
+						<input type="number" max="31" min="1" name="day" placeholder="dd"> -
+						<input type="number" max="12" min="1" name="month" placeholder="mm"> -
+						<input type="number" max="2016" min="2015" name="year" placeholder="yyyy">
+					</div>
+
+					<label>hh:mm</label>
+					<div>
+						<input type="number" max="12" min="1" name="hour" placeholder="hh"> :
+						<input type="number" max="59" min="0" name="minute" placeholder="mm"> -
+						<select name="ampm">
+							<option value="AM">AM</option>
+							<option value="PM">PM</option>
+						</select>
+					</div>
+					<input class="pull-right btn-success btn-lg" type="submit" value="Add Event">
+				</form>
+			</div>
+		{{/if}}
+
+		<div class="row events">
+			{{#each events}}
+				{{> event}}
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="event">
+	<div class="col-sm-6">
+		<div class="event">
+			<div class="media">
+				<div class="col-xs-3">
+					<div class="panel panel-default text-center event-calendar">
+						<div class="panel-heading">
+							{{formatDate date "weekDay"}}
+						</div>
+						<div class="panel-body">
+							<h2>{{formatDate date "day"}}</h2>
+						</div>
+						<div class="panel-footer">
+							{{formatDate date "month"}}
+						</div>
+					</div>
+				</div>
+
+				<div class="media-body col-xs-9">
+					<h3 class="media-heading">
+						<a href="{{pathFor 'event-detail'}}">{{title}}</a>
+					</h3>
+					<h5 class="text-muted">
+						<p><span class="glyphicon glyphicon-calendar"></span> {{formatDate date "long"}}</p>
+					</h5>
+					<p class="event-description">{{description}}</p>
+
+					<p >
+						{{#if hasRsvpd}}
+							<a class="event-rsvp-btn rsvpd gray-link" href="#">
+								<span class="glyphicon glyphicon-ok"></span>
+								Going
+							</a>
+						{{else}}
+							<a class="event-rsvp-btn gray-link" href="#">
+								<span class="glyphicon glyphicon-ok"></span>
+								I'm Going
+							</a>
+						{{/if}}
+
+						{{#if someRsvps}}
+							<div class="text-muted small">
+								<span class="glyphicon glyphicon-user"></span> {{rsvps}} {{peopleOrPerson rsvps}} going
+							</div>
+						{{/if}}
+					</p>
+				</div>
+				<a class="gray-link pull-right details-link" href="/events/{{_id}}">Details...</a>
+			</div>
+		</div>
+	</div>
+</template>

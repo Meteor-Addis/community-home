@@ -1,7 +1,6 @@
 /**
  * Created by Hilawi on 1/1/15.
  */
-
 getEnvironment = function(){
     if(process.env.ROOT_URL == "http://addis.meteor.com"){
         return "production";

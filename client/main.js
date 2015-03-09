@@ -3,200 +3,267 @@ Users = Meteor.users;
 // Client Logic
 
 if (Meteor.isClient) {
-    Meteor.subscribe("users");
 
-    Template.home.events({
-       "click .join-us-btn": function(event) {
-           event.preventDefault();
+	Template.home.events({
+		"click .join-us-btn": function(event) {
+			event.preventDefault();
 
-           $('.login-dropdown-item').addClass('open');
-           $('.signInForm').css('display', 'none');
-           $('.registrationForm').css('display', 'block');
+			$('.login-dropdown-item').addClass('open');
+			$('.signInForm').css('display', 'none');
+			$('.registrationForm').css('display', 'block');
 
-           return false;
-       }
-    });
+			return false;
+		}
+	});
 
-    Template.members.helpers({
-        allUsers: function() {
-            return Users.find({}, {sort: {"profile.name": 1}});
-        },
-        facebookProfile: function() {
-            return this.services.facebook.id;
-        },
-        githubProfile: function() {
-            return this.profile.html_url;
-        },
-        meetupProfile: function() {
-            return this.profile.link;
-        }
-    });
+	Meteor.subscribe("users");
 
-    Template.login.events({
-        "click #facebook-login": function(event) {
-            Meteor.loginWithFacebook({}, function(err) {
-                if (err) {
-                    throw new Meteor.Error("Facebook login failed");
-                }
-            });
-        },
+	Template.members.helpers({
+		allUsers: function () {
+			return Users.find({}, {sort: {"profile.name": 1}});
+		},
+		facebookProfile: function () {
+			return this.services.facebook.id;
+		},
+		githubProfile: function () {
+			return this.profile.html_url;
+		},
+		meetupProfile: function () {
+			return this.profile.link;
+		}
+	});
 
-        "click #github-login": function(event) {
-            Meteor.loginWithGithub({
-                requestPermissions: ['user', 'public_repo']
-            },
-            function(err) {
-                if (err) {
-                    throw new Meteor.Error("Github login failed");
-                }
-            });
-        },
+	Template.footer.helpers({
+		now: function() {
+			new Date();
+		}
+	});
 
-        "click #meetup-login": function(event) {
-            Meteor.loginWithMeetup({}, function(err) {
-                if (err) {
-                    console.log(err);
-                    throw new Meteor.Error("Meetup login failed");
-                }
-            });
-        },
+	Template.settings.events({
+		"click .deleteAccount": function (event) {
+			event.preventDefault();
 
-        "click #signIn": function(event, template) {
-            event.preventDefault();
+			var id = Meteor.userId();
 
-            var email = template.find('.email-input').value;
-            var password = template.find('.password-input').value;
+			Meteor.call('deleteUser', id);
 
-            Meteor.loginWithPassword(email, password, function(err) {
-                if (err) {
-                    throw new Meteor.Error("Password login failed");
-                }
-            });
+			Router.go('/index');
 
-            return false;
-        },
+		}
+	});
 
-        "click #register": function(event) {
-            event.preventDefault();
+	Template.login.events({
+		"click #facebook-login": function (event) {
+			Meteor.loginWithFacebook({}, function (err) {
+				if (err) {
+					throw new Meteor.Error("Facebook login failed");
+				}
+			});
+		},
 
-            $('.signInForm').css('display', 'none');
-            $('.registrationForm').css('display', 'block');
+		"click #github-login": function (event) {
+			Meteor.loginWithGithub({
+					requestPermissions: ['user', 'public_repo']
+				},
+				function (err) {
+					if (err) {
+						throw new Meteor.Error("Github login failed");
+					}
+				});
+		},
 
-            return false;
-        },
+		"click #meetup-login": function (event) {
+			Meteor.loginWithMeetup({}, function (err) {
+				if (err) {
+					console.log(err);
+					throw new Meteor.Error("Meetup login failed");
+				}
+			});
+		},
 
-        "click #cancelRegister": function(event) {
-            event.preventDefault();
+		"click #sign-in": function (event, template) {
+			event.preventDefault();
 
-            $('.registrationForm').css('display', 'none');
-            $('.signInForm').css('display', 'block');
+			var email = template.find('.email-input').value;
+			var password = template.find('.password-input').value;
 
-            return false;
-        },
+			Meteor.loginWithPassword(email, password, function (err) {
+				if (err) {
+					throw new Meteor.Error("Password login failed");
+				}
+			});
 
-        'click #createUser': function(event, template) {
-            event.preventDefault();
+			return false;
+		},
 
-            var first = template.find('.fName-input').value;
-            var last = template.find('.lName-input').value;
-            var fullName = first.concat(" ", last);
-            var email = template.find('#registrationEmail').value;
-            var password = template.find('#registrationPassword').value;
+		"click #register": function (event) {
+			event.preventDefault();
+
+			$('.sign-in-form').css('display', 'none');
+			$('.registration-form').css('display', 'block');
+
+			return false;
+		},
+
+		"click #cancel-register": function (event) {
+			event.preventDefault();
+
+			$('.registration-form').css('display', 'none');
+			$('.sign-in-form').css('display', 'block');
+
+			return false;
+		},
+
+		'click #create-user': function (event, template) {
+			event.preventDefault();
+
+			var first = template.find('.fName-input').value;
+			var last = template.find('.lName-input').value;
+			var fullName = first.concat(" ", last);
+			var email = template.find('#registrationEmail').value;
+			var password = template.find('#registrationPassword').value;
 
 
-            Accounts.createUser({email: email, password : password, profile: {name: fullName}}, function(err) {
-                if (err) {
-                    throw new Meteor.Error("Registration failed");
-                }
+			Accounts.createUser({email: email, password: password, profile: {name: fullName}}, function (err) {
+				if (err) {
+					throw new Meteor.Error("Registration failed");
+				}
 
-            });
-        },
+			});
+		},
 
-        "click .changePassword": function(event, template) {
-            event.preventDefault();
+		"click .changePassword": function (event, template) {
+			event.preventDefault();
 
-            $('.dropdown-menu').css('width', '300px');
-            $('#myProfile').css('display', 'none');
-            $('#changePassword').css('display', 'none');
-            $('#logout').css('display', 'none');
-            $('#changePasswordSection').css('display', 'block');
+			$('.dropdown-menu').css('width', '300px');
+			$('#myProfile').css('display', 'none');
+			$('#changePassword').css('display', 'none');
+			$('#logout').css('display', 'none');
+			$('#changePasswordSection').css('display', 'block');
 
-            return false;
-        },
+			return false;
+		},
 
-        "click #submit-change": function(event, template) {
-            event.preventDefault();
+		"click #submit-change": function (event, template) {
+			event.preventDefault();
 
-            var oldPassword = template.find('.old-password').value;
-            var newPassword = template.find('.new-password').value;
-            var confirmPassword = template.find('.confirm-password').value;
+			var oldPassword = template.find('.old-password').value;
+			var newPassword = template.find('.new-password').value;
+			var confirmPassword = template.find('.confirm-password').value;
 
-            if (newPassword === confirmPassword) {
-                Accounts.changePassword(oldPassword, newPassword, function(err) {
-                    if (err) {
-                        alert(err.reason);
-                        throw new Meteor.Error("Password change failed");
-                    }
-                    else {
-                        alert("Password changed!");
-                        $('.dropdown-menu').css('width', 'auto');
-                        $('#myProfile').css('display', 'block');
-                        $('#changePassword').css('display', 'block');
-                        $('#logout').css('display', 'block');
-                        $('#changePasswordSection').css('display', 'none');
-                    }
-                });
-            }
-            else {
-                alert("Passwords don't match");
-            }
+			if (newPassword === confirmPassword) {
+				Accounts.changePassword(oldPassword, newPassword, function (err) {
+					if (err) {
+						alert(err.reason);
+						throw new Meteor.Error("Password change failed");
+					}
+					else {
+						alert("Password changed!");
+						$('.dropdown-menu').css('width', 'auto');
+						$('#myProfile').css('display', 'block');
+						$('#changePassword').css('display', 'block');
+						$('#logout').css('display', 'block');
+						$('#changePasswordSection').css('display', 'none');
+					}
+				});
+			}
+			else {
+				alert("Passwords don't match");
+			}
 
-            return false;
-        },
+			return false;
+		},
 
-        "click #cancel-change": function(event) {
-            event.preventDefault();
+		"click #cancel-change": function (event) {
+			event.preventDefault();
 
-            $('.dropdown-menu').css('width', 'auto');
-            $('#myProfile').css('display', 'block');
-            $('#changePassword').css('display', 'block');
-            $('#logout').css('display', 'block');
-            $('#changePasswordSection').css('display', 'none');
+			$('.dropdown-menu').css('width', 'auto');
+			$('#myProfile').css('display', 'block');
+			$('#changePassword').css('display', 'block');
+			$('#logout').css('display', 'block');
+			$('#changePasswordSection').css('display', 'none');
 
-            return false;
-        },
+			return false;
+		},
 
-        "click .deleteAccount": function(event) {
-            event.preventDefault();
+		"click .deleteAccount": function (event) {
+			event.preventDefault();
 
-            var id = Meteor.userId();
+			var id = Meteor.userId();
 
-            Meteor.call('deleteUser', id);
+			Meteor.call('deleteUser', id);
+			Router.go('/index');
 
-            Router.go('/index');
+		},
 
-        },
+		"click .form-control": function (event) {
+			event.preventDefault();
+			return false;
+		},
 
-        "click .form-control": function(event) {
-            event.preventDefault();
-            return false;
-        },
-
-        "click .logout": function(event) {
-            Meteor.logout(function(err) {
-                if (err) {
-                    throw new Meteor.Error("Logout failed");
-                }
-            })
-        }
-    })
-
+		"click .logout": function (event) {
+			Meteor.logout(function (err) {
+				if (err) {
+					throw new Meteor.Error("Logout failed");
+				}
+			})
+		}
+	});
 }
 
-Handlebars.registerHelper('activeIfCurrent', function (page) {
+var DateFormats = {
+	short: "MMMM DD, YYYY",
+	long: "dddd DD MMM YYYY - HH:mm A",
+	year: "YYYY",
+	weekDay: "dddd",
+	day: "DD",
+	month: "MMMM"
+};
+
+function nthDay(d) {
+	if(d>3 && d<21) return 'th';
+ switch (d % 10) {
+       case 1:  return "st";
+       case 2:  return "nd";
+       case 3:  return "rd";
+       default: return "th";
+   }
+}
+
+UI.registerHelper("peopleOrPerson", function (count) {
+
+	if (count == 1) {
+		return "person is";
+	} else {
+		return "people are";
+	}
+});
+
+UI.registerHelper("formatDate", function (datetime, format) {
+
+	if (moment) {
+		f = DateFormats[format];
+		return moment(datetime).format(f);
+	}
+
+	else {
+		return datetime;
+	}
+});
+
+UI.registerHelper("formatTime", function (time, format) {
+	if (moment) {
+		f = DateFormats[format];
+		return moment(datetime).format(f);
+	}
+	else {
+		return datetime;
+	}
+});
+
+UI.registerHelper('activeIfCurrent', function (page) {
 	if (Router.current().route.getName() == page) {
 		return "active";
 	}
 	return "";
 });
-
