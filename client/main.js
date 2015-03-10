@@ -3,19 +3,6 @@ Users = Meteor.users;
 // Client Logic
 
 if (Meteor.isClient) {
-
-	Template.home.events({
-		"click .join-us-btn": function(event) {
-			event.preventDefault();
-
-			$('.login-dropdown-item').addClass('open');
-			$('.signInForm').css('display', 'none');
-			$('.registrationForm').css('display', 'block');
-
-			return false;
-		}
-	});
-
 	Meteor.subscribe("users");
 
 	Template.members.helpers({

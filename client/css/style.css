@@ -301,7 +301,7 @@ section.parallax {
   margin: 0;
   border: none;
   border-radius: 0;
-  height: 60px;
+  height: 66px;
 }
 #login-dropdown .avatar {
   display: inline-block;
@@ -309,7 +309,6 @@ section.parallax {
   height: 40px;
 }
 .inverse-dropdown {
-  margin-top: 12px !important;
   background-color: #222222;
   border-color: #080808;
 }

@@ -33,6 +33,7 @@ if (Meteor.isClient) {
 			Meteor.call("addEvent", title, description, datetime);
 
 			// reset the form
+			$('.new-event')[0].reset();
 
 			return false;
 		},
@@ -76,20 +77,20 @@ if (Meteor.isClient) {
 
 
 	Template.events.helpers({
-   events: function () {
-	   return Events.find({presented: {$ne: true}}, {sort: {createdAt: -1}});
-   },
+	   events: function () {
+		   return Events.find({presented: {$ne: true}}, {sort: {createdAt: -1}});
+	   },
 
-   suggested: function () {
-	   return Events.find({}, {sort: {createdAt: -1}});
-   }
- });
+	   suggested: function () {
+		   return Events.find({}, {sort: {createdAt: -1}});
+	   }
+ 	});
 
 	Template.event.helpers({
 
-   isOwner: function () {
-     return this.owner === Meteor.userId();
-   },
+	   isOwner: function () {
+		 return this.owner === Meteor.userId();
+   		},
 
 		getName: function () {
 			var user = Users.findOne(this.owner);
@@ -97,29 +98,29 @@ if (Meteor.isClient) {
 			return user.profile.name;
 		},
 
-   hasRsvpd: function () {
+	   hasRsvpd: function () {
 
-	   return EventRsvps.find({user: Meteor.userId(), event: this._id}).count() > 0;
-   },
+		   return EventRsvps.find({user: Meteor.userId(), event: this._id}).count() > 0;
+	   },
 
-   someRsvps: function () {
+	   someRsvps: function () {
 
-	   return EventRsvps.find({event: this._id}).count() > 0;
-   }
- });
+		   return EventRsvps.find({event: this._id}).count() > 0;
+	   }
+ 	});
 
 	Template.viewEvent.helpers({
 
-   attendees: function () {
-	   var x = EventRsvps.find({event: this._id});
+	   attendees: function () {
+		   var x = EventRsvps.find({event: this._id});
 
-     return x;
+		 return x;
    }
- });
+ 	});
 
 	Template.home.helpers({
-   events: function () {
-	   return Events.find({date: {$gt: new Date().getTime()}}, {sort: {date: 1}, limit: 3});
-   }
- });
+	   events: function () {
+		   return Events.find({date: {$gt: new Date().getTime()}}, {sort: {date: 1}, limit: 3});
+	   }
+ 	});
 }

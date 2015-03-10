@@ -64,17 +64,17 @@ if (Meteor.isClient) {
 
 
 	Template.topics.helpers({
-   topics: function () {
-	   return Topics.find({presented: {$ne: true}}, {sort: {votes: -1, createdAt: -1}});
-   },
+	   topics: function () {
+		   return Topics.find({presented: {$ne: true}}, {sort: {votes: -1, createdAt: -1}});
+	   },
 
-   suggested: function () {
-	   return Topics.find({}, {sort: {votes: -1, createdAt: -1}});
-   },
+	   suggested: function () {
+		   return Topics.find({}, {sort: {votes: -1, createdAt: -1}});
+	   },
 
-   presented: function () {
-	   return Topics.find({presented: {$ne: false}}, {sort: {votes: -1, createdAt: -1}});
-   },
+	   presented: function () {
+		   return Topics.find({presented: {$ne: false}}, {sort: {votes: -1, createdAt: -1}});
+	   },
 
 		noSuggested: function () {
 			return Topics.find({}, {sort: {votes: -1}}).count() == 0;
