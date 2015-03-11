@@ -8,7 +8,7 @@ getEnvironment = function(){
     else{
         return "development";
     }
-}
+};
 
 var env = getEnvironment();
 

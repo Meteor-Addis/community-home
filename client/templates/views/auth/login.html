@@ -2,9 +2,13 @@
 	<button class="btn btn-danger login-btn dropdown-toggle" type="button" id="login-dropdown" data-toggle="dropdown"
 	        aria-expanded="true">
 		{{#if currentUser }}
-			{{> avatar user=currentUser size="extra-small" shape="rounded" }}
-			<!--TODO: Replace use of avatar by profile.picture with special CSS. Avatar is not guaranteed to match profile.picture-->
-			{{ currentUser.profile.name }}
+			<div id="login-profile">
+				<img id="nav-avatar" src="{{ currentUser.profile.picture }}">
+
+				<!--TODO: Replace use of avatar by profile.picture with special CSS. Avatar is not guaranteed to match profile.picture-->
+
+				{{ currentUser.profile.name }}
+			</div>
 		{{else}}
 			Login/Sign Up
 		{{/if}}
