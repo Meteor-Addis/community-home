@@ -104,13 +104,20 @@ if (Meteor.isClient) {
 		'click #create-user': function (event, template) {
 			event.preventDefault();
 
+			// Collect data from form
 			var first = template.find('.fName-input').value;
 			var last = template.find('.lName-input').value;
 			var fullName = first.concat(" ", last);
 			var email = template.find('#registrationEmail').value;
 			var password = template.find('#registrationPassword').value;
 
+			// Check if users already exists
+			if ( Users.findOne({'profile.email': email}) ) {
+				alert("User already exists");
+				throw new Meteor.Error("User already exists!");
+			}
 
+			// Create the user
 			Accounts.createUser({email: email, password: password, profile: {name: fullName}}, function (err) {
 				if (err) {
 					throw new Meteor.Error("Registration failed");
